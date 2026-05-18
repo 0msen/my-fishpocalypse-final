@@ -81,9 +81,11 @@ Depends on but does NOT implement: `GameState` (SEN), `InventorySystem` (CJ).
 - `_can_fish: bool` — true only when GameState state is DAY
 
 **Fishing spot trigger:**
-- A sibling `Area3D` node (`FishingSpotArea`) at the water's edge
-- `body_entered` / `body_exited` track whether Player is in range
-- `interact` input while in range + `_can_fish` → call `start_fishing()`
+- Each `FishingSpot` is a Node3D placed at the island perimeter (grass meets water edge). Contains:
+  - `Area3D` (`FishingSpotArea`) — collision shape covering the stand-here zone; `body_entered` / `body_exited` track whether Player is in range
+  - `Marker3D` (`FacingMarker`) — child node positioned outward toward the water; its `-Z` forward points away from the island
+- `interact` input while in range + `_can_fish` → `start_fishing(spot: FishingSpot)`
+- On `start_fishing`: snap player `global_rotation.y` to match `spot.facing_marker.global_rotation.y` so the player billboard faces the water (prevents fishing-into-a-wall visually)
 
 **Catch pool:**
 - On catch, build eligible pool: all `ItemsDB.fish_weapons` where `spawn_day <= GameState.day_count`, plus all healing items, plus all fishing poles
