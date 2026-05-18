@@ -31,9 +31,7 @@ func _ready() -> void:
 		_game_state.transition_started.connect(_on_day_ended)
 	minigame.caught.connect(_on_caught)
 	minigame.failed.connect(_on_failed)
-	for spot: FishingSpot in get_tree().get_nodes_in_group("fishing_spots"):
-		spot.player_entered.connect(_on_spot_entered)
-		spot.player_exited.connect(_on_spot_exited)
+	call_deferred("_connect_fishing_spots")
 
 func _on_day_started() -> void:
 	_can_fish = true
@@ -46,9 +44,9 @@ func _on_day_ended() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not _can_fish or not _in_spot or minigame.is_active():
 		return
-	if not InputMap.has_action("interact"):
+	if not InputMap.has_action("INTERACT"):
 		return
-	if event.is_action_pressed("interact"):
+	if event.is_action_pressed("INTERACT"):
 		_start_fishing()
 
 func _start_fishing() -> void:
@@ -144,3 +142,8 @@ func _on_caught(item: Resource) -> void:
 
 func _on_failed() -> void:
 	pass  # Phase 8: play fail SFX via AudioManager
+
+func _connect_fishing_spots() -> void:
+	for spot: FishingSpot in get_tree().get_nodes_in_group("fishing_spots"):
+		spot.player_entered.connect(_on_spot_entered)
+		spot.player_exited.connect(_on_spot_exited)

@@ -12,9 +12,11 @@
 script = ExtResource("1_fs")
 items_db = ExtResource("4_db")
 rarity_config = ExtResource("5_rc")
-minigame = NodePath("../FishingMinigame")
-
-[node name="FishingMinigame" parent="." instance=ExtResource("2_fmg")]
+minigame = NodePath("../UI/FishingMinigame")
 
 [node name="FishingSpot" parent="." instance=ExtResource("3_fsp")]
 position = Vector3(5.0, 0.0, 0.0)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="FishingMinigame" parent="UI" instance=ExtResource("2_fmg")]
