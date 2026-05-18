@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cqjk6u4wv4adb"]
+[gd_scene load_steps=33 format=3 uid="uid://cqjk6u4wv4adb"]
 
 [ext_resource type="Script" uid="uid://cddg1xr5hye1d" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain.gd" id="1_scy8l"]
 [ext_resource type="Script" uid="uid://dqeuj3gddfm65" path="res://addons/MarchingSquaresTerrain/editor/tools/scripts/marching_squares_texture_names.gd" id="2_b37wp"]
@@ -13,6 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://c7nwvepnxcsw" path="res://scenes/player/DebugPlayer.tscn" id="11_jwbod"]
 [ext_resource type="Shader" uid="uid://cbd0h0rh7wpph" path="res://shader/clouds.gdshader" id="12_b37wp"]
 [ext_resource type="Texture2D" uid="uid://cv4ugy50jeh4i" path="res://assets/resources/cloud_noise.tres" id="13_g63d6"]
+[ext_resource type="Script" uid="uid://d2m8wwurpal4s" path="res://scripts/fishing_system.gd" id="14_fsys"]
+[ext_resource type="PackedScene" path="res://scenes/ui/fishing_minigame.tscn" id="15_fmg"]
+[ext_resource type="PackedScene" path="res://scenes/fishing_spot.tscn" id="16_fsp"]
+[ext_resource type="Resource" path="res://resources/data/items_db.tres" id="17_db"]
+[ext_resource type="Resource" path="res://resources/data/rarities/rarity_config.tres" id="18_rc"]
 
 [sub_resource type="Texture2D" id="Texture2D_p1dug"]
 resource_local_to_scene = false
@@ -78,7 +83,7 @@ material = SubResource("ShaderMaterial_g63d6")
 [node name="TestScene" type="Node3D"]
 
 [node name="DebugPlayer" parent="." instance=ExtResource("11_jwbod")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.83638, 7.723818, -21.101898)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.867311, 1.5975461, -17.111214)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 99.995, 0)
@@ -250,3 +255,16 @@ transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, 71.67545, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SKY"]
 layers = 1023
 mesh = SubResource("PlaneMesh_b37wp")
+
+[node name="FishingSystem" type="Node" parent="."]
+script = ExtResource("14_fsys")
+items_db = ExtResource("17_db")
+rarity_config = ExtResource("18_rc")
+minigame = NodePath("../UI/FishingMinigame")
+
+[node name="FishingSpot" parent="." instance=ExtResource("16_fsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.83638, 0.5590067, -20.5)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="FishingMinigame" parent="UI" instance=ExtResource("15_fmg")]

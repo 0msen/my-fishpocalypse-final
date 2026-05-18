@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/fishing_system.gd" id="1_fs"]
+[ext_resource type="PackedScene" path="res://scenes/ui/fishing_minigame.tscn" id="2_fmg"]
+[ext_resource type="PackedScene" path="res://scenes/fishing_spot.tscn" id="3_fsp"]
+[ext_resource type="Resource" path="res://resources/data/items_db.tres" id="4_db"]
+[ext_resource type="Resource" path="res://resources/data/rarities/rarity_config.tres" id="5_rc"]
+
+[node name="Main" type="Node3D"]
+
+[node name="FishingSystem" type="Node" parent="."]
+script = ExtResource("1_fs")
+items_db = ExtResource("4_db")
+rarity_config = ExtResource("5_rc")
+minigame = NodePath("../UI/FishingMinigame")
+
+[node name="FishingSpot" parent="." instance=ExtResource("3_fsp")]
+position = Vector3(5.0, 0.0, 0.0)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="FishingMinigame" parent="UI" instance=ExtResource("2_fmg")]

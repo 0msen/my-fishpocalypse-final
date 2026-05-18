@@ -10,6 +10,9 @@ var is_dodging := false
 var dodge_timer := 0.0
 var dodge_dir := Vector3.ZERO
 
+func _ready() -> void:
+	add_to_group("player")
+
 func _physics_process(delta):
 	if not is_on_floor(): velocity.y -= gravity * delta
 	else: velocity.y = 0
