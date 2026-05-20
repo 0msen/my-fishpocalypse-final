@@ -1,0 +1,52 @@
+[gd_scene load_steps=31 format=3 uid="uid://bjgds8umisd4"]
+
+[ext_resource type="Script" uid="uid://cfpggjs8l682h" path="res://scripts/itemSpawnerSystem/ItemSpawner.gd" id="1_mvj3b"]
+[ext_resource type="Script" uid="uid://b3l4mkx2jhvf6" path="res://scripts/rarity/rarity_config.gd" id="2_dmipf"]
+[ext_resource type="Script" uid="uid://b6n72xqvx6ro0" path="res://scripts/rarity/rarity_tier.gd" id="3_2to3o"]
+[ext_resource type="Resource" uid="uid://cn865m7rml8k8" path="res://assets/resources/rarities/0_common.tres" id="4_2f63m"]
+[ext_resource type="Resource" uid="uid://c6bjtoa84jgmi" path="res://assets/resources/rarities/1_uncommon.tres" id="5_ng16s"]
+[ext_resource type="Resource" uid="uid://1dg3p3oa18u0" path="res://assets/resources/rarities/2_rare.tres" id="6_7tp55"]
+[ext_resource type="Resource" uid="uid://ckbetd72dnxex" path="res://assets/resources/rarities/3_epic.tres" id="7_gsbq1"]
+[ext_resource type="Resource" uid="uid://b2jobnf883hmk" path="res://assets/resources/rarities/4_legendary.tres" id="8_pkvjx"]
+[ext_resource type="Resource" uid="uid://tjjifhuhteam" path="res://assets/resources/rarities/5_mythic.tres" id="9_7hqch"]
+[ext_resource type="Resource" uid="uid://bpdx4hoxktnn5" path="res://assets/resources/rarities/6_question.tres" id="10_pihi3"]
+[ext_resource type="Script" uid="uid://cb7xcgwlk1l1h" path="res://scripts/itemSystem/itemAttributes/fish_weapon_data.gd" id="11_1w474"]
+[ext_resource type="Resource" uid="uid://umlmcxwchtcx" path="res://assets/resources/items/weapons/bakunawa_beam.tres" id="12_p0w45"]
+[ext_resource type="Resource" uid="uid://csf1eacvh6dwt" path="res://assets/resources/items/weapons/bangus_blaster.tres" id="13_fq087"]
+[ext_resource type="Resource" uid="uid://p8aexjtlixri" path="res://assets/resources/items/weapons/crab_cannon.tres" id="14_n6fqe"]
+[ext_resource type="Resource" uid="uid://djy70k6j1vhd3" path="res://assets/resources/items/weapons/mackerel_burst.tres" id="15_g7gr1"]
+[ext_resource type="Resource" uid="uid://ddk0edb4xrwyp" path="res://assets/resources/items/weapons/sardine_shooter.tres" id="16_uarxs"]
+[ext_resource type="Resource" uid="uid://dfotxynqstn4u" path="res://assets/resources/items/weapons/shark_shotgun.tres" id="17_kd5v5"]
+[ext_resource type="Resource" uid="uid://bx8tuqsxbgofm" path="res://assets/resources/items/weapons/squid_spray.tres" id="18_flr2h"]
+[ext_resource type="Resource" uid="uid://duqs0wt1hjnub" path="res://assets/resources/items/weapons/tuna_lobber.tres" id="19_q6ugx"]
+[ext_resource type="Script" uid="uid://8ko8ju356at2" path="res://scripts/itemSystem/itemAttributes/healing_item_data.gd" id="20_kwylo"]
+[ext_resource type="Resource" uid="uid://dcprpe0i084oq" path="res://assets/resources/items/healingItems/0_bandage.tres" id="21_kbh61"]
+[ext_resource type="Resource" uid="uid://crfcm8wn0p6xd" path="res://assets/resources/items/healingItems/1_herbal_brew.tres" id="22_yu1ou"]
+[ext_resource type="Resource" uid="uid://i0d3hh0ks8yx" path="res://assets/resources/items/healingItems/3_fish_wrap.tres" id="23_y1f8s"]
+[ext_resource type="Resource" uid="uid://7qm7iiadgk3h" path="res://assets/resources/items/healingItems/4_sea_blessing.tres" id="24_7jpax"]
+[ext_resource type="Script" uid="uid://btinxc3vf3cat" path="res://scripts/itemSystem/itemAttributes/fishing_pole_data.gd" id="25_qhiu6"]
+[ext_resource type="Resource" uid="uid://dubjjn8dtttoc" path="res://assets/resources/items/poles/0_basic_pole.tres" id="26_vi7ax"]
+[ext_resource type="Resource" uid="uid://dqgabgbptwfw6" path="res://assets/resources/items/poles/1_reinforced_pole.tres" id="27_uq5hj"]
+[ext_resource type="Resource" uid="uid://bh7y3pobcvt0r" path="res://assets/resources/items/poles/2_fish_pole.tres" id="28_y6gjs"]
+
+[sub_resource type="Resource" id="Resource_x0hep"]
+script = ExtResource("2_dmipf")
+tiers = Array[ExtResource("3_2to3o")]([ExtResource("4_2f63m"), ExtResource("5_ng16s"), ExtResource("6_7tp55"), ExtResource("7_gsbq1"), ExtResource("8_pkvjx"), ExtResource("9_7hqch"), ExtResource("10_pihi3")])
+metadata/_custom_type_script = "uid://b3l4mkx2jhvf6"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dmipf"]
+
+[node name="Test_SpawnSystem" type="Node3D"]
+script = ExtResource("1_mvj3b")
+rarity_config = SubResource("Resource_x0hep")
+test_weapon_pool = Array[ExtResource("11_1w474")]([ExtResource("12_p0w45"), ExtResource("13_fq087"), ExtResource("14_n6fqe"), ExtResource("15_g7gr1"), ExtResource("16_uarxs"), ExtResource("17_kd5v5"), ExtResource("18_flr2h"), ExtResource("19_q6ugx")])
+test_healing_pool = Array[ExtResource("20_kwylo")]([ExtResource("21_kbh61"), ExtResource("22_yu1ou"), ExtResource("23_y1f8s"), ExtResource("24_7jpax")])
+test_pole_pool = Array[ExtResource("25_qhiu6")]([ExtResource("26_vi7ax"), ExtResource("27_uq5hj"), ExtResource("28_y6gjs")])
+
+[node name="Marker3D" type="Marker3D" parent="."]
+gizmo_extents = 0.5
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_dmipf")

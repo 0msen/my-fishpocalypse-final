@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfxqgr6ywu4"]
+
+[ext_resource type="Script" uid="uid://5ivkkwr534gm" path="res://scripts/projectileSystem/projectile_spawner.gd" id="1_fygdo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fygdo"]
+
+[node name="ProjectileSpawner" type="Node3D"]
+script = ExtResource("1_fygdo")
+
+[node name="AnimatedSprite3D" type="Sprite3D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_fygdo")
