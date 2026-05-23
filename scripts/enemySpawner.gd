@@ -1,56 +1,49 @@
 extends Node3D
 
-@export var player : CharacterBody3D
-@export var enemy : PackedScene
-@export var night : Node3D
+@export var player: CharacterBody3D
+@export var enemy: PackedScene
 
-var distance : float = 50.0
+var spawn_distance: float = 50.0
+var base_spawn_amount: int = 1
+var enemies_spawned_this_night: int = 0
+var is_night: bool = false
 
-var day : int:
-	set(value):
-		day = value
-		
-var hour : int:
-	set(value):
-		hour = value
-		if hour >= 6:
-			hour -= 6
-			day += 1
-
-var minute : int:
-	set(value):
-		minute = value
-		if minute >= 3:
-			minute -= 3
-			hour += 1
-		
-var second : int:
-	set(value):
-		second = value
-		if second >= 60:
-			second -= 60
-			minute += 1
-		
-func spawn(pos : Vector3):
-	var enimi_instance = enemy.instantiate()
-
-	enimi_instance.position = pos
-	enimi_instance.player_reference = player
-	get_tree().current_scene.add_child(enimi_instance)
-
-func get_random_position() -> Vector3:
-	var random_direction = Vector3.RIGHT.rotated(
-		Vector3.UP,
-		randf_range(0, 2 * PI)
-	)
-
-	return player.position + random_direction * distance
+func _ready() -> void:
+	# assume the day/night system is in a group
+	var day_night_system = get_tree().get_first_node_in_group("day_night")
+	if day_night_system == null:
+		push_warning("No Day/Night system found in group 'day_night'")
+		return
+	day_night_system.is_night.connect(_on_night_changed)
 	
-func amount(number : int = 1):
+	
+func _on_night_changed(active: bool) -> void:
+	is_night = active
+	
+func _on_timer_timeout() -> void:
+	if is_night:
+		var spawn_count: int = calculate_spawn_amount()
+		amount(spawn_count)
+		enemies_spawned_this_night += spawn_count
+	else:
+		enemies_spawned_this_night = 0
+		
+func calculate_spawn_amount() -> int:
+	return randi_range(base_spawn_amount, base_spawn_amount + 3)
+	
+func spawn(pos: Vector3) -> void:
+	var enemy_instance = enemy.instantiate()
+	enemy_instance.position = pos
+	if "player_reference" in enemy_instance:
+		enemy_instance.player_reference = player
+	get_tree().current_scene.add_child(enemy_instance)
+	
+	
+func get_random_position() -> Vector3:
+	var dir = Vector3.RIGHT.rotated(Vector3.UP, randf_range(0.0, TAU))
+	return player.position + dir * spawn_distance
+	
+	
+func amount(number: int = 1) -> void:
 	for i in range(number):
 		spawn(get_random_position())
-
-func _on_timer_timeout() -> void:
-	if night.check_night():
-		second += 1
-		amount(randi_range(1, 5) + minute)

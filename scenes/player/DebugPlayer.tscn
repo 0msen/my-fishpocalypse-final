@@ -265,7 +265,8 @@ fov = 60.0
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-billboard = 2
+billboard = 1
+shaded = true
 double_sided = false
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_id87f")

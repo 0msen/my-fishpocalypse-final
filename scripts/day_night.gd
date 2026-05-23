@@ -1,7 +1,6 @@
 extends Node3D
 
 @export var sunlight:DirectionalLight3D
-@export var world_env:WorldEnvironment
 @export var day_duration: float = 360.0
 @export var time_of_day:float = 0.5
 var min_sun_energy := 0.0
