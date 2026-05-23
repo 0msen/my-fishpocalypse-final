@@ -55,11 +55,16 @@ func _physics_process(delta):
 		dodge_dir = input_dir
 		return
 		
-	# SHOOT
+	# PLACEHOLDER for SHOOT
 	if Input.is_action_just_pressed("SHOOT"):
+		# if player currently equipping is "weapon":
+			#weapon.shoot()
+		# if player currently equipping is "weapon":
+			#item.consume()
+		# else player is not holding anything
 		print("Shoot!")
 		
-	# ANIMATION and AUDIO
+	# ANIMATION and AUDIO player
 	_play_move_anim()
 	
 	move_and_slide()

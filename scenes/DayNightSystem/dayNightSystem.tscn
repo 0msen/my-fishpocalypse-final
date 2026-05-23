@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwr1m6px173c6"]
+
+[ext_resource type="Script" uid="uid://bykntgvfrlrs8" path="res://scripts/dayNightSystem/day_cycle.gd" id="1_ffewv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ffewv"]
+
+[sub_resource type="Sky" id="Sky_03cim"]
+sky_material = SubResource("ProceduralSkyMaterial_ffewv")
+
+[sub_resource type="Environment" id="Environment_ffewv"]
+background_mode = 2
+sky = SubResource("Sky_03cim")
+
+[node name="DayNightSys" type="Node3D"]
+script = ExtResource("1_ffewv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+light_color = Color(1, 1, 0.43529412, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ffewv")
