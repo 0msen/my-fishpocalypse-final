@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwr1m6px173c6"]
 
-[ext_resource type="Script" uid="uid://bykntgvfrlrs8" path="res://scripts/dayNightSystem/day_cycle.gd" id="1_ffewv"]
+[ext_resource type="Script" uid="uid://bykntgvfrlrs8" path="res://scripts/DayNightSystem/day_cycle.gd" id="1_ffewv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5mkf"]
 sky_top_color = Color(0.22745098, 0.3019608, 0.9490196, 1)

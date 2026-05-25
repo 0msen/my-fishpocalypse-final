@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cqjk6u4wv4adb"]
+[gd_scene load_steps=46 format=3 uid="uid://cqjk6u4wv4adb"]
 
 [ext_resource type="Script" uid="uid://cddg1xr5hye1d" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain.gd" id="1_scy8l"]
 [ext_resource type="Script" uid="uid://dqeuj3gddfm65" path="res://addons/MarchingSquaresTerrain/editor/tools/scripts/marching_squares_texture_names.gd" id="2_b37wp"]
@@ -17,9 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://cv4ugy50jeh4i" path="res://assets/resources/cloud_noise.tres" id="13_g63d6"]
 [ext_resource type="Script" uid="uid://d2m8wwurpal4s" path="res://scripts/fishSystem/fishing_system.gd" id="14_fsys"]
 [ext_resource type="ArrayMesh" uid="uid://dxqp0wkpiex87" path="res://assets/models/kahoy/Sketchfab_Scene_coconut_tree_coconut_tree_mat_0.res" id="14_qrpbx"]
+[ext_resource type="Script" uid="uid://cb2jjm11a4e1i" path="res://scripts/EnvironmentRelated/dagat_script.gd" id="15_auh40"]
 [ext_resource type="PackedScene" path="res://scenes/FishingRelated/fishing_minigame.tscn" id="15_fmg"]
+[ext_resource type="AudioStream" uid="uid://om8oo53ef3fb" path="res://assets/audio/nature_sea.mp3" id="15_ruire"]
 [ext_resource type="PackedScene" path="res://scenes/FishingRelated/fishing_spot.tscn" id="16_fsp"]
 [ext_resource type="Resource" uid="uid://dyjmr7uqctvpk" path="res://assets/resources/items/items_db.tres" id="17_db"]
+[ext_resource type="AudioStream" uid="uid://c7hcdv2c20g5g" path="res://assets/audio/nature_wind.mp3" id="17_mgn8j"]
+[ext_resource type="AudioStream" uid="uid://bsjj75pl8hp15" path="res://assets/audio/nature_bird.mp3" id="18_663dh"]
 [ext_resource type="Resource" uid="uid://lih8tf53aotr" path="res://assets/resources/rarities/rarity_config.tres" id="18_rc"]
 [ext_resource type="PackedScene" uid="uid://x0tobd048vlo" path="res://scenes/EnemyRelated/enemySpawner.tscn" id="21_v3fq3"]
 [ext_resource type="PackedScene" uid="uid://2kqy5yq4kdod" path="res://scenes/EnemyRelated/enemy.tscn" id="22_0f85l"]
@@ -89,6 +93,9 @@ material = SubResource("ShaderMaterial_61ffe")
 [sub_resource type="BoxShape3D" id="BoxShape3D_qrpbx"]
 size = Vector3(1, 4.9920654, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ruire"]
+size = Vector3(67, 5, 150)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g63d6"]
 render_priority = 0
 shader = ExtResource("12_b37wp")
@@ -103,8 +110,7 @@ material = SubResource("ShaderMaterial_g63d6")
 
 [node name="DN_CYCLE" parent="." unique_id=1953072460 instance=ExtResource("23_bv014")]
 transform = Transform3D(0.7071067, 0.49999997, -0.49999994, 0, 0.70710677, 0.7071067, 0.7071067, -0.49999997, 0.49999994, 0, 90, 10)
-day_length_sec = 160
-speed_factor = 10.0
+speed_factor = 1.0
 
 [node name="ISLAND" type="Node3D" parent="." unique_id=780296146]
 
@@ -611,8 +617,46 @@ shape = SubResource("BoxShape3D_qrpbx")
 [node name="Foliages" type="Node3D" parent="ISLAND" unique_id=360004925]
 visible = false
 
-[node name="SKY" type="Node3D" parent="." unique_id=403064684]
-transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, 71.67545, 0)
+[node name="AudioSources" type="Node3D" parent="ISLAND"]
+
+[node name="Dagat" type="Node3D" parent="ISLAND/AudioSources"]
+
+[node name="Node3D" type="Area3D" parent="ISLAND/AudioSources/Dagat"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.34724, 3.8824024, 0)
+script = ExtResource("15_auh40")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/AudioSources/Dagat/Node3D"]
+shape = SubResource("BoxShape3D_ruire")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ISLAND/AudioSources/Dagat/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28279114, 0, 0)
+stream = ExtResource("15_ruire")
+
+[node name="Node3D2" type="Area3D" parent="ISLAND/AudioSources/Dagat"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.68038, 3.8824024, 0)
+script = ExtResource("15_auh40")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/AudioSources/Dagat/Node3D2"]
+shape = SubResource("BoxShape3D_ruire")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ISLAND/AudioSources/Dagat/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28279114, 0, 0)
+stream = ExtResource("15_ruire")
+
+[node name="Wind" type="AudioStreamPlayer" parent="ISLAND/AudioSources"]
+stream = ExtResource("17_mgn8j")
+autoplay = true
+playback_type = 1
+parameters/looping = true
+
+[node name="Bird" type="AudioStreamPlayer" parent="ISLAND/AudioSources"]
+stream = ExtResource("18_663dh")
+autoplay = true
+playback_type = 1
+parameters/looping = true
+
+[node name="SKY" type="Node3D" parent="."]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 71.67545, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SKY" unique_id=169244059]
 layers = 1023

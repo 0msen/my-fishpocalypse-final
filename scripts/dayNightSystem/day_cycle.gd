@@ -22,7 +22,7 @@ func _ready() -> void:
 	# ADDED: set loop on all night tracks
 	for track in NIGHT_MUSIC:
 		track.loop = true
-	music_player.volume_db = -12.0
+	music_player.volume_db = -16.0
 	add_to_group("day_night")
 	_env = world_env.environment
 	if _env and _env.sky and _env.sky.sky_material:
@@ -49,7 +49,7 @@ func _set_day_state() -> void:
 		_env.fog_density = 0.90
 		_env.fog_sky_affect = 1.0
 	music_player.stream = MORNING_MUSIC
-	music_player.play()
+	music_player.play() # e comment lng ni kung saba kaau
 	day_night_changed.emit(false)
 	
 func _set_night_state() -> void:
