@@ -65,7 +65,7 @@ func _start_fishing() -> void:
 		return
 	if _current_spot != null and _player != null:
 		_player.global_rotation.y = _current_spot.facing_marker.global_rotation.y
-	minigame.start(item, pole)
+	minigame.start_wait(item, pole)
 	_freeze_player()
 
 func _roll_item(pole: FishingPoleData) -> Resource:
