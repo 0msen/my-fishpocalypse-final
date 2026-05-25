@@ -63,9 +63,9 @@ metadata/_custom_type_script = "uid://dqeuj3gddfm65"
 [sub_resource type="Resource" id="Resource_658wv"]
 script = ExtResource("4_ewnbt")
 terrain_textures = Array[Texture2D]([ExtResource("5_61ffe"), ExtResource("5_61ffe"), ExtResource("5_61ffe"), ExtResource("5_61ffe"), ExtResource("5_61ffe"), ExtResource("6_cbjsr"), null, SubResource("Texture2D_p1dug"), SubResource("Texture2D_38l2j"), SubResource("Texture2D_ta716"), SubResource("Texture2D_1nue7"), SubResource("Texture2D_iuhot"), SubResource("Texture2D_vk8tc"), SubResource("Texture2D_11ep3"), SubResource("Texture2D_fpfsv")])
-texture_scales = Array[float]([1.4, 1.2000000000000002, 1.1, 0.9, 1.1, 0.6, 1.1, 0.9, 1.0, 1.1, 1.0, 0.9, 1.0, 1.0, 1.0])
-grass_colors = Array[Color]([Color(0.39185053, 0.5764706, 0.06274508, 1), Color(0.6744791, 0.63125384, 0.27927652, 1), Color(0.45178062, 0.5807291, 0.09527587, 1), Color(0.34110647, 0.5130209, 0.05744766, 1), Color(0.2901961, 0.49411765, 0.3647059, 1), Color(0.31195977, 0.3203125, 0.11427815, 1)])
-has_grass = Array[bool]([false, true, true, true, true])
+texture_scales = Array[float]([1.4, 1.4, 0.7999999999999999, 1.3, 1.2000000000000002, 0.6, 1.2000000000000002, 0.9, 1.0, 1.1, 1.0, 0.9, 1.0, 1.0, 1.0])
+grass_colors = Array[Color]([Color(0.5620437, 0.9140625, 0.016662616, 1), Color(1, 0.9265203, 0.3203125, 1), Color(0.56078434, 0.78431374, 0.015686275, 1), Color(0.48974344, 0.8255208, 0.032246906, 1), Color(0.4244792, 0.2130686, 0.029846193, 1), Color(0.93931264, 0.9609375, 0.3878784, 1)])
+has_grass = Array[bool]([false, true, true, false, false])
 
 [sub_resource type="Resource" id="Resource_uyltb"]
 script = ExtResource("8_40akt")
@@ -90,15 +90,17 @@ render_priority = 0
 shader = ExtResource("12_b37wp")
 shader_parameter/noise_tex = ExtResource("13_g63d6")
 shader_parameter/alpha_cutoff = 0.70000003325
-shader_parameter/speed = 0.002000000095
+shader_parameter/speed = 0.0030000001425
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b37wp"]
 material = SubResource("ShaderMaterial_g63d6")
 
 [node name="TestScene" type="Node3D"]
 
-[node name="Player" parent="." instance=ExtResource("11_jwbod")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.867311, 0.5601834, -17.111214)
+[node name="DN_CYCLE" parent="." instance=ExtResource("23_bv014")]
+transform = Transform3D(0.7071067, 0.49999997, -0.49999994, 0, 0.70710677, 0.7071067, 0.7071067, -0.49999997, 0.49999994, 0, 90, 10)
+day_length_sec = 160
+speed_factor = 10.0
 
 [node name="ISLAND" type="Node3D" parent="."]
 
@@ -117,18 +119,21 @@ texture_13 = SubResource("Texture2D_vk8tc")
 texture_14 = SubResource("Texture2D_11ep3")
 texture_15 = SubResource("Texture2D_fpfsv")
 tex2_has_grass = false
-texture_albedo_1 = Color(0.39185053, 0.5764706, 0.06274508, 1)
-texture_albedo_2 = Color(0.6744791, 0.63125384, 0.27927652, 1)
-texture_albedo_3 = Color(0.45178062, 0.5807291, 0.09527587, 1)
-texture_albedo_4 = Color(0.34110647, 0.5130209, 0.05744766, 1)
-texture_albedo_6 = Color(0.31195977, 0.3203125, 0.11427815, 1)
+tex5_has_grass = false
+tex6_has_grass = false
+texture_albedo_1 = Color(0.5620437, 0.9140625, 0.016662616, 1)
+texture_albedo_2 = Color(1, 0.9265203, 0.3203125, 1)
+texture_albedo_3 = Color(0.56078434, 0.78431374, 0.015686275, 1)
+texture_albedo_4 = Color(0.48974344, 0.8255208, 0.032246906, 1)
+texture_albedo_5 = Color(0.4244792, 0.2130686, 0.029846193, 1)
+texture_albedo_6 = Color(0.93931264, 0.9609375, 0.3878784, 1)
 texture_scale_1 = 1.4
-texture_scale_2 = 1.2000000000000002
-texture_scale_3 = 1.1
-texture_scale_4 = 0.9
-texture_scale_5 = 1.1
+texture_scale_2 = 1.4
+texture_scale_3 = 0.7999999999999999
+texture_scale_4 = 1.3
+texture_scale_5 = 1.2000000000000002
 texture_scale_6 = 0.6
-texture_scale_7 = 1.1
+texture_scale_7 = 1.2000000000000002
 texture_scale_8 = 0.9
 texture_scale_10 = 1.1
 texture_scale_12 = 0.9
@@ -253,11 +258,7 @@ chunk_coords = Vector2i(-2, -2)
 cast_shadow = 0
 script = ExtResource("10_h6vph")
 
-[node name="WaterPlaceholder" type="MeshInstance3D" parent="ISLAND"]
-transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, -1.5, 0)
-mesh = SubResource("PlaneMesh_cbjsr")
-
-[node name="WaterPlaceholder2" type="MeshInstance3D" parent="ISLAND"]
+[node name="Dagat" type="MeshInstance3D" parent="ISLAND"]
 transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, -1.5, 0)
 mesh = SubResource("PlaneMesh_cbjsr")
 
@@ -268,8 +269,8 @@ transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, 0, 71.67545, 0)
 layers = 1023
 mesh = SubResource("PlaneMesh_b37wp")
 
-[node name="DN_CYCLE" parent="." instance=ExtResource("23_bv014")]
-transform = Transform3D(0.4355957, -0.6597396, 0.6123724, 0.4330127, 0.75, 0.5, -0.7891491, 0.047367185, 0.6123724, 0, 90, 10)
+[node name="Player" parent="." instance=ExtResource("11_jwbod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.867311, 0.5601834, -17.111214)
 
 [node name="FishingSpot" parent="." instance=ExtResource("16_fsp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.83638, 0.5590067, -20.5)
