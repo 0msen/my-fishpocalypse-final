@@ -119,8 +119,15 @@ func _process(delta: float) -> void:
 					failed.emit()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _state == State.BITE and event.is_action_pressed("INTERACT"):
-		_set_state(State.ACTIVE)
+	if not event.is_action_pressed("INTERACT"):
+		return
+	match _state:
+		State.WAITING:
+			# Early press — fail the cast, player must recast
+			_set_state(State.IDLE)
+			failed.emit()
+		State.BITE:
+			_set_state(State.ACTIVE)
 
 func _update_fish(delta: float) -> void:
 	_fish_dir_timer -= delta

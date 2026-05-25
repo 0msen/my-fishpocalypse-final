@@ -17,6 +17,7 @@ var current_anim := ""
 
 func _ready() -> void:
 	add_to_group("player")
+	inventory.slot_changed.connect(func(_slot): _log_inventory())
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
