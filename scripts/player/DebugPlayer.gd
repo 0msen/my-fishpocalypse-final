@@ -7,15 +7,25 @@ extends CharacterBody3D
 @export var gravity := 20.0
 
 @onready var anim: AnimatedSprite3D = $Sprite3D
+@onready var spotlight: SpotLight3D = $SpotLight3D
 
 var is_dodging := false
 var dodge_timer := 0.0
 var dodge_dir := Vector3.ZERO
-
 var current_anim := ""
 
 func _ready() -> void:
 	add_to_group("player")
+	if spotlight: spotlight.visible = false
+	
+	# Connect to Day/Night system
+	var day_night_system = get_tree().get_first_node_in_group("day_night")
+	if day_night_system: day_night_system.day_night_changed.connect(_on_night_changed); print("[DNS] Found")
+	
+# Suga kung gabii na
+func _on_night_changed(active: bool) -> void:
+	if spotlight: spotlight.visible = active
+
 
 func _physics_process(delta):
 	# gravity
@@ -32,7 +42,7 @@ func _physics_process(delta):
 			is_dodging = false
 		move_and_slide()
 		return
-	
+		
 	# INPUT
 	var input_dir := Vector3.ZERO
 	if Input.is_action_pressed("D"): input_dir.x += 1
@@ -42,8 +52,7 @@ func _physics_process(delta):
 	input_dir = input_dir.normalized()
 	
 	var speed = walk_speed
-	if Input.is_action_pressed("RUN"):
-		speed = run_speed
+	if Input.is_action_pressed("RUN"): speed = run_speed
 	
 	velocity.x = input_dir.x * speed
 	velocity.z = input_dir.z * speed
