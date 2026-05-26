@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://d2m8wwurpal4s" path="res://scripts/fishSystem/fishing_system.gd" id="14_fsys"]
 [ext_resource type="ArrayMesh" uid="uid://dxqp0wkpiex87" path="res://assets/models/kahoy/Sketchfab_Scene_coconut_tree_coconut_tree_mat_0.res" id="14_qrpbx"]
 [ext_resource type="Script" uid="uid://cb2jjm11a4e1i" path="res://scripts/EnvironmentRelated/dagat_script.gd" id="15_auh40"]
-[ext_resource type="PackedScene" path="res://scenes/FishingRelated/fishing_minigame.tscn" id="15_fmg"]
+[ext_resource type="PackedScene" uid="uid://cgxmpu1beld0d" path="res://scenes/FishingRelated/fishing_minigame.tscn" id="15_fmg"]
 [ext_resource type="AudioStream" uid="uid://om8oo53ef3fb" path="res://assets/audio/nature_sea.mp3" id="15_ruire"]
 [ext_resource type="PackedScene" path="res://scenes/FishingRelated/fishing_spot.tscn" id="16_fsp"]
 [ext_resource type="Resource" uid="uid://dyjmr7uqctvpk" path="res://assets/resources/items/items_db.tres" id="17_db"]
@@ -111,7 +111,8 @@ material = SubResource("ShaderMaterial_g63d6")
 
 [node name="DN_CYCLE" parent="." unique_id=1953072460 instance=ExtResource("23_bv014")]
 transform = Transform3D(0.7071067, 0.49999997, -0.49999994, 0, 0.70710677, 0.7071067, 0.7071067, -0.49999997, 0.49999994, 0, 90, 10)
-speed_factor = 1.0
+day_length_sec = 20
+speed_factor = 20.0
 
 [node name="ISLAND" type="Node3D" parent="." unique_id=780296146]
 

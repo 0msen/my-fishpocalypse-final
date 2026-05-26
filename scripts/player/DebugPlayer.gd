@@ -142,12 +142,8 @@ func get_facing_dir() -> Vector3:
 
 func _on_night_changed(active: bool) -> void:
 	if spotlight: spotlight.visible = active
-
-
 func _on_health_changed(current: int, _maximum: int) -> void:
 	HP = current
-
-
 func _on_player_died() -> void:
 	set_physics_process(false)
 
@@ -281,3 +277,8 @@ func _spawn_dodge_ghost() -> void:
 	ghost.global_position = global_position
 	ghost.global_rotation = global_rotation
 	ghost.setup(anim, anim.frame)
+	
+func deduct_sp(amount: float) -> void:
+	SP = max(SP - amount, 0)
+func deduct_cp(amount: float) -> void:
+	CP = max(CP - amount, 0)

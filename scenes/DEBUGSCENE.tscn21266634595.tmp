@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c1e1hib0s0kw5"]
+
+[ext_resource type="Script" uid="uid://cddg1xr5hye1d" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain.gd" id="1_6vqgu"]
+[ext_resource type="PackedScene" uid="uid://c7nwvepnxcsw" path="res://scenes/player/DebugPlayer.tscn" id="1_f51xp"]
+[ext_resource type="Script" uid="uid://cql4d8s5t5xcx" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain_chunk.gd" id="2_11k51"]
+[ext_resource type="Script" uid="uid://22l7ysgniux3" path="res://addons/MarchingSquaresTerrain/algorithm/grass/marching_squares_grass_planter.gd" id="3_kt4yw"]
+[ext_resource type="PackedScene" uid="uid://bjgds8umisd4" path="res://scenes/ItemRelated/ItemSpawner.tscn" id="5_11k51"]
+[ext_resource type="PackedScene" uid="uid://dwr1m6px173c6" path="res://scenes/DayNightSystem/dayNightSystem.tscn" id="6_kt4yw"]
+
+[node name="Debugscene" type="Node3D" unique_id=465993810]
+
+[node name="Test_DayNightSys" parent="." unique_id=1190894348 instance=ExtResource("6_kt4yw")]
+transform = Transform3D(1, 0, 0, 0, 0.61902535, 0.78537095, 0, -0.78537095, 0.61902535, -38.557625, 18.330717, -30.996449)
+day_length_sec = 160
+speed_factor = 20.0
+
+[node name="Test_SpawnItemSystem" parent="." unique_id=500310652 instance=ExtResource("5_11k51")]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -13.619774, 0.8912382, -20.280832)
+dbg = true
+
+[node name="plane" type="Node3D" parent="." unique_id=2139842601]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+
+[node name="MarchingSquaresTerrain" type="Node3D" parent="plane" unique_id=760167878]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+script = ExtResource("1_6vqgu")
+data_directory = "res://scenes/DEBUGSCENE_TerrainData/MarchingSquaresTerrain_6e005b73"
+polygon_texture_resolution = 16
+_storage_initialized = true
+texture_albedo_1 = Color(0.56078434, 0.9137255, 0.015686275, 1)
+metadata/_custom_type_script = "uid://cddg1xr5hye1d"
+
+[node name="Chunk (-1, -1)" type="MeshInstance3D" parent="plane/MarchingSquaresTerrain" unique_id=1276407139 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, -64)
+script = ExtResource("2_11k51")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-1, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="plane/MarchingSquaresTerrain/Chunk (-1, -1)" unique_id=1049987022]
+cast_shadow = 0
+script = ExtResource("3_kt4yw")
+
+[node name="DebugPlayer" parent="." unique_id=386761944 instance=ExtResource("1_f51xp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.483946, 1.5366004, -4.9039993)
+HP = null
+CP = null
+SP = null
+RR_CP = null
+RR_SP = null
+walk_speed = null
+run_speed = null
+dodge_speed = null
+dodge_time = null
+gravity = null
+
+[editable path="Test_DayNightSys"]

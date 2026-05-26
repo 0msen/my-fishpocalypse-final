@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://cgxmpu1beld0d"]
 
 [ext_resource type="Script" uid="uid://6cxlnnsaydcq" path="res://scripts/fishSystem/fishing_minigame.gd" id="1_fmg"]
 [ext_resource type="Script" uid="uid://8bo4ffiqn4ll" path="res://scripts/fishSystem/fishing_bar.gd" id="2_fb"]
 
-[node name="FishingMinigame" type="Control"]
+[node name="FishingMinigame" type="Control" unique_id=1621987674]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,10 +12,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-visible = false
 script = ExtResource("1_fmg")
 
-[node name="CenterBox" type="CenterContainer" parent="."]
+[node name="CenterBox" type="CenterContainer" parent="." unique_id=1661921978]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,35 +23,34 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ContentVBox" type="VBoxContainer" parent="CenterBox"]
+[node name="ContentVBox" type="VBoxContainer" parent="CenterBox" unique_id=2023145611]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="BarsHBox" type="HBoxContainer" parent="CenterBox/ContentVBox"]
+[node name="BarsHBox" type="HBoxContainer" parent="CenterBox/ContentVBox" unique_id=1247240678]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="FishBar" type="Control" parent="CenterBox/ContentVBox/BarsHBox"]
+[node name="FishBar" type="Control" parent="CenterBox/ContentVBox/BarsHBox" unique_id=1223678827]
+custom_minimum_size = Vector2(40, 200)
 layout_mode = 2
-custom_minimum_size = Vector2(40.0, 200.0)
 script = ExtResource("2_fb")
 
-[node name="CatchProgress" type="ProgressBar" parent="CenterBox/ContentVBox/BarsHBox"]
+[node name="CatchProgress" type="ProgressBar" parent="CenterBox/ContentVBox/BarsHBox" unique_id=570137232]
+custom_minimum_size = Vector2(14, 200)
 layout_mode = 2
-custom_minimum_size = Vector2(14.0, 200.0)
-show_percentage = false
-fill_mode = 3
-min_value = 0.0
 max_value = 1.0
 step = 0.001
-value = 0.0
+fill_mode = 3
+show_percentage = false
 
-[node name="HoldLabel" type="Label" parent="CenterBox/ContentVBox"]
+[node name="HoldLabel" type="Label" parent="CenterBox/ContentVBox" unique_id=91282029]
 layout_mode = 2
 text = "Hold [F] to rise"
 horizontal_alignment = 1
 
-[node name="WaitLabel" type="Label" parent="."]
+[node name="WaitLabel" type="Label" parent="." unique_id=628939857]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,11 +63,11 @@ offset_right = 120.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-visible = false
 text = "Waiting for a bite..."
 horizontal_alignment = 1
 
-[node name="BiteLabel" type="Label" parent="."]
+[node name="BiteLabel" type="Label" parent="." unique_id=1047904367]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -81,8 +80,8 @@ offset_right = 120.0
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-visible = false
-text = "!! BITE !!\nPress [F]"
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 24
 theme_override_colors/font_color = Color(1, 0.9, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+text = "!! BITE !!
+Press [F]"
+horizontal_alignment = 1

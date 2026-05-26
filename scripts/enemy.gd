@@ -22,8 +22,7 @@ func _apply_elite_modifiers() -> void:
 	scale *= 1.4
 
 func _physics_process(delta):
-	if player_reference == null:
-		return
+	if player_reference == null: return
 	var direction = (player_reference.global_position - global_position).normalized()
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed

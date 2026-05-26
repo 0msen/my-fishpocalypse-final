@@ -1,27 +1,27 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene format=3 uid="uid://wvybintiidea"]
 
 [ext_resource type="Script" uid="uid://d2m8wwurpal4s" path="res://scripts/fishSystem/fishing_system.gd" id="1_fs"]
 [ext_resource type="PackedScene" path="res://scenes/FishingRelated/fishing_minigame.tscn" id="2_fmg"]
 [ext_resource type="PackedScene" path="res://scenes/FishingRelated/fishing_spot.tscn" id="3_fsp"]
 [ext_resource type="Resource" uid="uid://dyjmr7uqctvpk" path="res://assets/resources/items/items_db.tres" id="4_db"]
 [ext_resource type="Resource" uid="uid://lih8tf53aotr" path="res://assets/resources/rarities/rarity_config.tres" id="5_rc"]
-[ext_resource type="PackedScene" path="res://scenes/ItemRelated/ItemSpawner.tscn" id="6_spawner"]
+[ext_resource type="PackedScene" uid="uid://bjgds8umisd4" path="res://scenes/ItemRelated/ItemSpawner.tscn" id="6_spawner"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=1156408728]
 
-[node name="FishingSystem" type="Node" parent="."]
+[node name="FishingSystem" type="Node" parent="." unique_id=1515996464]
 script = ExtResource("1_fs")
 items_db = ExtResource("4_db")
 rarity_config = ExtResource("5_rc")
 minigame = NodePath("../UI/FishingMinigame")
 item_spawner = NodePath("../ItemSpawner")
 
-[node name="FishingSpot" parent="." instance=ExtResource("3_fsp")]
-position = Vector3(5.0, 0.0, 0.0)
+[node name="FishingSpot" parent="." unique_id=2127646809 instance=ExtResource("3_fsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1767177406]
 
-[node name="FishingMinigame" parent="UI" instance=ExtResource("2_fmg")]
+[node name="FishingMinigame" parent="UI" unique_id=71495738 instance=ExtResource("2_fmg")]
 
-[node name="ItemSpawner" parent="." instance=ExtResource("6_spawner")]
+[node name="ItemSpawner" parent="." unique_id=2070310918 instance=ExtResource("6_spawner")]
 rarity_config = ExtResource("5_rc")

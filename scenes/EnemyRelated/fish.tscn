@@ -1,19 +1,47 @@
 [gd_scene format=3 uid="uid://by4e1q3ce1ehm"]
 
-[ext_resource type="Texture2D" uid="uid://kcjhd5bn20pc" path="res://assets/sprites/fish.png" id="1_1jb4u"]
 [ext_resource type="Script" uid="uid://cudh7e2jibvxb" path="res://scripts/Fish/fish.gd" id="1_202cl"]
+[ext_resource type="Texture2D" uid="uid://duwgbcpnh4ysr" path="res://assets/sprites/isda_normal.png" id="2_202cl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4i7jc"]
+atlas = ExtResource("2_202cl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8cn2"]
+atlas = ExtResource("2_202cl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4iwxp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4i7jc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8cn2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4i7jc"]
-size = Vector3(1.7648163, 1.5214844, 1)
+size = Vector3(1.7648163, 1.5214844, 0.31103516)
 
 [node name="Fish" type="CharacterBody3D" unique_id=254113885]
 collision_layer = 2
 script = ExtResource("1_202cl")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=689405485]
-transform = Transform3D(0.3, 0, 0, 0, 0.27233326, 0.12583564, 0, -0.12583564, 0.27233326, 0, 1.0917702, 0)
-texture = ExtResource("1_1jb4u")
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=1644682285]
+pixel_size = 0.03
+billboard = 1
+shaded = true
+alpha_cut = 3
+alpha_scissor_threshold = 1.0
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_4iwxp")
+autoplay = "default"
+frame_progress = 0.5741037
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1335891917]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116752625, 0.73779297, 0)
 shape = SubResource("BoxShape3D_4i7jc")

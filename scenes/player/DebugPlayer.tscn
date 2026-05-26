@@ -313,8 +313,9 @@ script = ExtResource("1_x2lrw")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=629382131]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6, 10)
+visible = false
 current = true
-fov = 60.0
+fov = 37.849285
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=787803252]
 
