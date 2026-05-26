@@ -1,22 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5tqab5vyrfd1"]
+[gd_scene format=3 uid="uid://c5tqab5vyrfd1"]
 
 [ext_resource type="Script" uid="uid://b3ltu8yvyvwmk" path="res://scripts/itemSystem/0_weaponTemplate.gd" id="1_vl7ue"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_216tx"]
 size = Vector3(1.4112854, 0.5266113, 0.15039063)
 
-[node name="Weapon" type="Node3D"]
+[node name="Weapon" type="Node3D" unique_id=1139125347]
 script = ExtResource("1_vl7ue")
 
-[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=403291015]
 
-[node name="Muzzle" type="Marker3D" parent="."]
+[node name="Muzzle" type="Marker3D" parent="." unique_id=1678472452]
 
-[node name="Hitbox" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="." unique_id=841167838]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1325479569]
 shape = SubResource("BoxShape3D_216tx")
 
-[node name="WeaponAudio" type="AudioStreamPlayer3D" parent="."]
+[node name="WeaponAudio" type="AudioStreamPlayer3D" parent="." unique_id=1182481494]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1709953355]

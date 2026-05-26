@@ -12,6 +12,8 @@ enum ProjectileType { BULLET, LASER }
 @export var lifetime: float = 2.0
 
 @export var sprite: Texture2D
+@export var packed_scene: PackedScene
+
 
 # laser-specific (optional but important)
 @export var beam_length: float = 50.0

@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dh6v8jwf3ys5n" path="res://scripts/player/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://bm3np4q7x2crt" path="res://scripts/player/health.gd" id="2_health"]
 [ext_resource type="Script" uid="uid://w1w5a2782ygt" path="res://scripts/player/inventory_system.gd" id="3_inventory"]
-[ext_resource type="Script" uid="uid://fn1q8wd4zg6hy" path="res://scripts/player/buff_system.gd" id="4_buffs"]
-[ext_resource type="Script" uid="uid://ar9c2ms5xt7bk" path="res://scripts/player/combat_system.gd" id="5_combat"]
+[ext_resource type="Script" uid="uid://bsmvnugvgabp7" path="res://scripts/player/buff_system.gd" id="4_buffs"]
+[ext_resource type="Script" uid="uid://sac2ms5xt7bk" path="res://scripts/player/combat_system.gd" id="5_combat"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -14,23 +14,23 @@ height = 1.8
 radius = 0.4
 height = 1.8
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=463979049]
 script = ExtResource("1_player")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=489070885]
 shape = SubResource("CapsuleShape3D_player")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1262906097]
 mesh = SubResource("CapsuleMesh_player")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." unique_id=469865030]
 script = ExtResource("2_health")
 
-[node name="InventorySystem" type="Node" parent="."]
+[node name="InventorySystem" type="Node" parent="." unique_id=1526536362]
 script = ExtResource("3_inventory")
 
-[node name="BuffSystem" type="Node" parent="."]
+[node name="BuffSystem" type="Node" parent="." unique_id=1763758560]
 script = ExtResource("4_buffs")
 
-[node name="CombatSystem" type="Node" parent="."]
+[node name="CombatSystem" type="Node" parent="." unique_id=665381787]
 script = ExtResource("5_combat")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cqjk6u4wv4adb"]
+[gd_scene format=3 uid="uid://cqjk6u4wv4adb"]
 
 [ext_resource type="Script" uid="uid://cddg1xr5hye1d" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain.gd" id="1_scy8l"]
 [ext_resource type="Script" uid="uid://dqeuj3gddfm65" path="res://addons/MarchingSquaresTerrain/editor/tools/scripts/marching_squares_texture_names.gd" id="2_b37wp"]
@@ -617,45 +617,45 @@ shape = SubResource("BoxShape3D_qrpbx")
 [node name="Foliages" type="Node3D" parent="ISLAND" unique_id=360004925]
 visible = false
 
-[node name="AudioSources" type="Node3D" parent="ISLAND"]
+[node name="AudioSources" type="Node3D" parent="ISLAND" unique_id=881782534]
 
-[node name="Dagat" type="Node3D" parent="ISLAND/AudioSources"]
+[node name="Dagat" type="Node3D" parent="ISLAND/AudioSources" unique_id=487470996]
 
-[node name="Node3D" type="Area3D" parent="ISLAND/AudioSources/Dagat"]
+[node name="Node3D" type="Area3D" parent="ISLAND/AudioSources/Dagat" unique_id=550617724]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.34724, 3.8824024, 0)
 script = ExtResource("15_auh40")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/AudioSources/Dagat/Node3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/AudioSources/Dagat/Node3D" unique_id=1584707894]
 shape = SubResource("BoxShape3D_ruire")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ISLAND/AudioSources/Dagat/Node3D"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ISLAND/AudioSources/Dagat/Node3D" unique_id=1037223794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28279114, 0, 0)
 stream = ExtResource("15_ruire")
 
-[node name="Node3D2" type="Area3D" parent="ISLAND/AudioSources/Dagat"]
+[node name="Node3D2" type="Area3D" parent="ISLAND/AudioSources/Dagat" unique_id=1745178279]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.68038, 3.8824024, 0)
 script = ExtResource("15_auh40")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/AudioSources/Dagat/Node3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ISLAND/AudioSources/Dagat/Node3D2" unique_id=330814029]
 shape = SubResource("BoxShape3D_ruire")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ISLAND/AudioSources/Dagat/Node3D2"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="ISLAND/AudioSources/Dagat/Node3D2" unique_id=50180758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28279114, 0, 0)
 stream = ExtResource("15_ruire")
 
-[node name="Wind" type="AudioStreamPlayer" parent="ISLAND/AudioSources"]
+[node name="Wind" type="AudioStreamPlayer" parent="ISLAND/AudioSources" unique_id=607537240]
 stream = ExtResource("17_mgn8j")
 autoplay = true
 playback_type = 1
 parameters/looping = true
 
-[node name="Bird" type="AudioStreamPlayer" parent="ISLAND/AudioSources"]
+[node name="Bird" type="AudioStreamPlayer" parent="ISLAND/AudioSources" unique_id=849614213]
 stream = ExtResource("18_663dh")
 autoplay = true
 playback_type = 1
 parameters/looping = true
 
-[node name="SKY" type="Node3D" parent="."]
+[node name="SKY" type="Node3D" parent="." unique_id=1829971248]
 transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 71.67545, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SKY" unique_id=169244059]

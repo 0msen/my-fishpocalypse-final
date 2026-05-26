@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://coorhorn3jw5t"]
+[gd_scene format=3 uid="uid://coorhorn3jw5t"]
 
 [ext_resource type="Script" uid="uid://cn50jyn0286xd" path="res://scripts/itemSystem/2_healingItemTemplate.gd" id="1_tx4bm"]
 
-[node name="HealingItemTemplate" type="Node3D"]
+[node name="HealingItemTemplate" type="Node3D" unique_id=1982820915]
 script = ExtResource("1_tx4bm")
 dbg = true
 
-[node name="ConsumeSound" type="AudioStreamPlayer3D" parent="."]
+[node name="ConsumeSound" type="AudioStreamPlayer3D" parent="." unique_id=1308990108]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1167728912]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=593265771]

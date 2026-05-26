@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bjgds8umisd4"]
+[gd_scene format=3 uid="uid://bjgds8umisd4"]
 
 [ext_resource type="Script" uid="uid://cfpggjs8l682h" path="res://scripts/itemSpawnerSystem/ItemSpawner.gd" id="1_mvj3b"]
 [ext_resource type="Script" uid="uid://b3l4mkx2jhvf6" path="res://scripts/rarity/rarity_config.gd" id="2_dmipf"]
@@ -36,17 +36,17 @@ metadata/_custom_type_script = "uid://b3l4mkx2jhvf6"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dmipf"]
 
-[node name="Test_SpawnSystem" type="Node3D"]
+[node name="Test_SpawnSystem" type="Node3D" unique_id=2078365853]
 script = ExtResource("1_mvj3b")
 rarity_config = SubResource("Resource_x0hep")
 test_weapon_pool = Array[ExtResource("11_1w474")]([ExtResource("12_p0w45"), ExtResource("13_fq087"), ExtResource("14_n6fqe"), ExtResource("15_g7gr1"), ExtResource("16_uarxs"), ExtResource("17_kd5v5"), ExtResource("18_flr2h"), ExtResource("19_q6ugx")])
 test_healing_pool = Array[ExtResource("20_kwylo")]([ExtResource("21_kbh61"), ExtResource("22_yu1ou"), ExtResource("23_y1f8s"), ExtResource("24_7jpax")])
 test_pole_pool = Array[ExtResource("25_qhiu6")]([ExtResource("26_vi7ax"), ExtResource("27_uq5hj"), ExtResource("28_y6gjs")])
 
-[node name="Marker3D" type="Marker3D" parent="."]
+[node name="Marker3D" type="Marker3D" parent="." unique_id=568723917]
 gizmo_extents = 0.5
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=398513021]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=533061011]
 shape = SubResource("SphereShape3D_dmipf")

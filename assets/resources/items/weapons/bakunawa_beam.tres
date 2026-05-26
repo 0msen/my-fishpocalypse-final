@@ -1,7 +1,13 @@
 [gd_resource type="Resource" script_class="FishWeaponData" format=3 uid="uid://umlmcxwchtcx"]
 
 [ext_resource type="Script" uid="uid://cb7xcgwlk1l1h" path="res://scripts/itemSystem/itemAttributes/fish_weapon_data.gd" id="1_3c0hn"]
+[ext_resource type="Script" uid="uid://donmcqvpf41ym" path="res://scripts/projectileSystem/projectile_data.gd" id="1_6xe7d"]
 [ext_resource type="Texture2D" uid="uid://ldemr53bgmuu" path="res://assets/sprites/missing_sprite3.png" id="3_3dh5y"]
+
+[sub_resource type="Resource" id="Resource_3dh5y"]
+script = ExtResource("1_6xe7d")
+sprite = ExtResource("3_3dh5y")
+metadata/_custom_type_script = "uid://donmcqvpf41ym"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ikkpi"]
 animations = [{
@@ -21,4 +27,5 @@ spawn_day = 25
 base_damage_per_shot = 80.0
 base_shot_delay = 1.2
 base_recharge_cost = 40.0
+projectile = SubResource("Resource_3dh5y")
 sprite_frames = SubResource("SpriteFrames_ikkpi")

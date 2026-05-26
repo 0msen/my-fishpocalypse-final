@@ -30,13 +30,13 @@ _storage_initialized = true
 texture_albedo_1 = Color(0.56078434, 0.9137255, 0.015686275, 1)
 metadata/_custom_type_script = "uid://cddg1xr5hye1d"
 
-[node name="Chunk (-1, -1)" type="MeshInstance3D" parent="plane/MarchingSquaresTerrain" unique_id=1276407139 node_paths=PackedStringArray("terrain_system")]
+[node name="Chunk (-1, -1)" type="MeshInstance3D" parent="plane/MarchingSquaresTerrain" unique_id=1835274330 node_paths=PackedStringArray("terrain_system")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, -64)
 script = ExtResource("2_11k51")
 terrain_system = NodePath("..")
 chunk_coords = Vector2i(-1, -1)
 
-[node name="GrassPlanter" type="MultiMeshInstance3D" parent="plane/MarchingSquaresTerrain/Chunk (-1, -1)" unique_id=1049987022]
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="plane/MarchingSquaresTerrain/Chunk (-1, -1)" unique_id=1623228092]
 cast_shadow = 0
 script = ExtResource("3_kt4yw")
 

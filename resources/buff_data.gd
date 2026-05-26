@@ -6,5 +6,4 @@ enum StatTarget { MOVE_SPEED, DAMAGE, SHOT_DELAY, HEAL_AMOUNT, MAX_HP, MAX_CP }
 @export var stat_target: StatTarget = StatTarget.MOVE_SPEED
 @export var multiplier: float = 1.0   # base_stat * multiplier
 @export var addend: float = 0.0       # applied after multiplier: (base * mult) + addend
-@export var duration: float = 10.0   # seconds; -1 = permanent until removed
 @export var icon: Texture2D

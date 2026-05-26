@@ -4,12 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bx6ioj8ukq16w" path="res://assets/sprites/SpriteSheet_Player.png" id="2_gf0uj"]
 [ext_resource type="Script" uid="uid://butapasd4olx0" path="res://scripts/components/health_component.gd" id="3_health"]
 [ext_resource type="Script" uid="uid://w1w5a2782ygt" path="res://scripts/player/inventory_system.gd" id="4_inv"]
-[ext_resource type="Script" uid="uid://cb7xcgwlk1l1h" path="res://scripts/itemSystem/itemAttributes/fish_weapon_data.gd" id="4_lsmmx"]
 [ext_resource type="Script" uid="uid://bsmvnugvgabp7" path="res://scripts/player/buff_system.gd" id="5_15rtr"]
-[ext_resource type="Script" uid="uid://btinxc3vf3cat" path="res://scripts/itemSystem/itemAttributes/fishing_pole_data.gd" id="5_nwkom"]
-[ext_resource type="Script" uid="uid://8ko8ju356at2" path="res://scripts/itemSystem/itemAttributes/healing_item_data.gd" id="6_bmswy"]
 [ext_resource type="Script" uid="uid://sac2ms5xt7bk" path="res://scripts/player/combat_system.gd" id="6_q2jae"]
-[ext_resource type="Script" uid="uid://xpnm82ynjqsm" path="res://scripts/itemSystem/items_db.gd" id="7_blpqp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xit8r"]
 size = Vector3(1.5, 1.5, 0.5)
@@ -264,16 +260,21 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="Resource" id="Resource_1p3k1"]
-script = ExtResource("7_blpqp")
-metadata/_custom_type_script = "uid://xpnm82ynjqsm"
-
-[node name="DebugPlayer" type="CharacterBody3D" unique_id=1697580463]
+[node name="DebugPlayer" type="CharacterBody3D" unique_id=888521579]
 script = ExtResource("1_x2lrw")
+HP = null
+CP = null
+SP = null
+RR_CP = null
+RR_SP = null
+walk_speed = null
+run_speed = null
+dodge_speed = null
+dodge_time = null
+gravity = null
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=629382131]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6, 10)
-current = true
 fov = 60.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=787803252]
@@ -301,14 +302,10 @@ shadow_enabled = true
 spot_range = 7.143156
 spot_angle = 44.10083
 
-[node name="Kamot" type="Marker3D" parent="." unique_id=265468261]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35141972, -0.22932763, 0.16790777)
-
 [node name="COMPONENTS" type="Node3D" parent="." unique_id=848142950]
 
 [node name="InventorySystem" type="Node" parent="COMPONENTS" unique_id=1226888241]
 script = ExtResource("4_inv")
-items_db = SubResource("Resource_1p3k1")
 
 [node name="HealthComponent" type="Node" parent="COMPONENTS" unique_id=177549279]
 script = ExtResource("3_health")

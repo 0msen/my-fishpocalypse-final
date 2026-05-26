@@ -1,4 +1,4 @@
-class_name Player extends CharacterBody3D
+extends CharacterBody3D
 
 @export var walk_speed: float = 5.0
 @export var run_speed: float = 9.0
