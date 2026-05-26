@@ -72,18 +72,18 @@ _None yet_
 - [x] `DebugPlayer.tscn`: CharacterBody3D + `AnimatedSprite3D` (billboard, nearest filter) with full spritesheet (idle, walk 4-dir, dodge, fish, hurt, item anims)
 - [x] WASD movement in world XZ plane
 - [x] Dodge action (`DODGE` input) — direction-based, timed, animation wired
-- [ ] Mouse or right-stick aim (player character faces aim direction)
+- [x] Mouse or right-stick aim (player character faces aim direction)
 - [x] `Health` component (reusable node: current/max value, `take_damage()`, `heal()`, `died` signal)
 - [x] HP on Player via Health component; no passive regen
-- [ ] CP stat: starts full; depletes on fire (Phase 3); recharges at rate over time
-- [ ] SP stat: starts full; depletes on dodge (Phase 3); regenerates over time
-- [ ] `CameraRig` as a separate scene tracking Player's XZ position (lerp speed configurable)
+- [x] CP stat: starts full; depletes on fire (Phase 3); recharges at rate over time
+- [x] SP stat: starts full; depletes on dodge (Phase 3); regenerates over time
+- [x] `CameraRig` as a separate scene tracking Player's XZ position (lerp speed configurable)
 - [ ] Player does not fall through Island
 
 ### Reminders
 - `Health` component will be reused verbatim on enemies in Phase 4
 - CP recharge rate and SP regen rate are `@export` — tune in Phase 9
-- Camera is currently embedded in `DebugPlayer.tscn` — needs extraction into a proper `CameraRig.tscn`
+- `CameraRig.tscn` is extracted and in `MainScene.tscn` — auto-finds player via group; `set_target()` available for manual wiring
 - Shoot input stub exists in `DebugPlayer.gd` (prints "Shoot!") — wired to `CombatSystem` in Phase 3
 
 ### Bugs
@@ -94,7 +94,7 @@ _None yet_
 
 ---
 
-## Phase 3 — Ranged Combat `IN PROGRESS` _(CJ)_
+## Phase 3 — Ranged Combat `DONE` _(CJ)_
 
 **Goal:** Player fires fish weapons. CP/recharge/post-shot-delay are enforced. Dodge consumes SP. Weapon hot-swap works between main and secondary slots.
 
@@ -108,9 +108,9 @@ _None yet_
 - [x] `Weapon` class (`0_weaponTemplate.gd`): `setup(data, rarity)`, `activate()`, `apply_data()`, `shoot()` — fires projectile(s), plays SFX, drives fire timer
 - [x] `Projectile` class (`projectile_spawner.gd`): moves via `ProjectileData`, handles BULLET (move + on-hit free) and LASER (tick damage), applies damage via `take_damage()` on body
 - [x] `WeaponTemplate.tscn`, `ProjectileSpawner.tscn` scenes exist
-- [ ] `CombatSystem` script on Player: `fire()` with CP check → spawn projectiles → deduct CP → start timers; `dodge()` with SP check; `swap_weapon()` toggling slots
-- [ ] CP bar depletes and recharges visibly (debug label ok for now; HUD in Phase 7)
-- [ ] Placeholder test-dummy target in scene (static node with Health component); projectile deals damage + dummy emits `died`
+- [x] `CombatSystem` script on Player: `fire()` with CP check → spawn projectiles → deduct CP → start timers; `dodge()` with SP check; `swap_weapon()` toggling slots
+- [x] CP bar depletes and recharges visibly (debug label ok for now; HUD in Phase 7)
+- [x] Placeholder test-dummy target in scene (static node with Health component); projectile deals damage + dummy emits `died`
 
 ### Reminders
 - `Weapon.shoot()` currently calls `data.projectile.scene.instantiate()` — `ProjectileData` needs a `scene: PackedScene` field or this needs to be reworked via `ProjectileSpawner`
