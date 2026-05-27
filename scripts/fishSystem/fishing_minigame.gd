@@ -26,6 +26,8 @@ const BITE_WINDOW_MAX := 100.0
 @onready var _catch_progress: ProgressBar = $CenterBox/ContentVBox/BarsHBox/CatchStatus/CatchProgress
 @onready var _wait_label: Label = $WaitLabel
 @onready var _bite_label: Label = $BiteLabel
+@onready var _reel_audio: AudioStreamPlayer = $ReelAudio
+@onready var _caught_audio: AudioStreamPlayer = $CaughtAudio
 
 var _state: State = State.IDLE
 var _fish_pos: float = 0.5
@@ -64,6 +66,7 @@ func _set_state(s: State) -> void:
 	_wait_label.visible = false
 	_bite_label.visible = false
 	$CenterBox.visible = false
+	_reel_audio.stop()
 
 	match s:
 		State.IDLE:
@@ -86,7 +89,13 @@ func _set_state(s: State) -> void:
 			_fish_dir_timer = 0.0
 			_zone_size = _pending_pole.base_bar_size
 			_fish_speed = _pending_pole.base_lure_speed
-		State.RESULT_SUCCESS, State.RESULT_FAIL:
+			_reel_audio.play()
+		State.RESULT_SUCCESS:
+			visible = true
+			$CenterBox.visible = true
+			_result_timer = RESULT_DISPLAY_TIME
+			_caught_audio.play()
+		State.RESULT_FAIL:
 			visible = true
 			$CenterBox.visible = true
 			_result_timer = RESULT_DISPLAY_TIME

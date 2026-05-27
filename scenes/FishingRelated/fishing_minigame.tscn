@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://6cxlnnsaydcq" path="res://scripts/fishSystem/fishing_minigame.gd" id="1_fmg"]
 [ext_resource type="Script" uid="uid://8bo4ffiqn4ll" path="res://scripts/fishSystem/fishing_bar.gd" id="2_fb"]
 [ext_resource type="Texture2D" uid="uid://c46bxdlpa7q0v" path="res://assets/sprites/catch_status.png" id="3_etqg6"]
+[ext_resource type="AudioStream" path="res://assets/audio/fishing_reel.mp3" id="4_reel"]
+[ext_resource type="AudioStream" path="res://assets/audio/caught_fish.mp3" id="5_caught"]
 
 [sub_resource type="Gradient" id="Gradient_etqg6"]
 offsets = PackedFloat32Array(0.305, 0.545, 0.795)
@@ -134,3 +136,11 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 29
 text = "HIT !"
 horizontal_alignment = 1
+
+[node name="ReelAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_reel")
+autoplay = false
+
+[node name="CaughtAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_caught")
+autoplay = false
