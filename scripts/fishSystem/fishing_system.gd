@@ -30,13 +30,16 @@ func _ready() -> void:
 		push_error("FishingSystem: 'items_db' export not assigned in Inspector.")
 		return
 	_game_state = get_node_or_null("/root/GameState")
-	if _game_state == null:
-		push_error("FishingSystem: GameState autoload not found. Register game_state.gd in Project > Autoloads.")
-		return
-	_game_state.day_started.connect(_on_day_started)
-	_game_state.night_started.connect(_on_day_ended)
-	if _game_state.has_signal("transition_started"):
-		_game_state.transition_started.connect(_on_day_ended)
+	if _game_state != null:
+		if _game_state.has_signal("day_started"):
+			_game_state.day_started.connect(_on_day_started)
+		if _game_state.has_signal("night_started"):
+			_game_state.night_started.connect(_on_day_ended)
+		if _game_state.has_signal("transition_started"):
+			_game_state.transition_started.connect(_on_day_ended)
+	else:
+		push_warning("FishingSystem: GameState autoload not found — fishing enabled for all times (debug mode).")
+		_can_fish = true
 	minigame.caught.connect(_on_caught)
 	minigame.failed.connect(_on_failed)
 	call_deferred("_connect_shore_zones")
@@ -203,9 +206,10 @@ func _unfreeze_player() -> void:
 	_locked_player = null
 
 func _connect_shore_zones() -> void:
-	for zone: ShoreZone in get_tree().get_nodes_in_group("shore_zones"):
-		zone.player_entered_shore.connect(_on_shore_entered)
-		zone.player_exited_shore.connect(_on_shore_exited)
+	for node in get_tree().get_nodes_in_group("shore_zones"):
+		if node is ShoreZone:
+			node.player_entered_shore.connect(_on_shore_entered)
+			node.player_exited_shore.connect(_on_shore_exited)
 
 func _get_item_rarity(item: Resource) -> RarityTier:
 	var r: RarityTier = item.get("rarity") as RarityTier
