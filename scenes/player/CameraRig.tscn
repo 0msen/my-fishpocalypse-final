@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://e1camerarig3q5"]
+[gd_scene format=3 uid="uid://dujw7glgc57os"]
 
 [ext_resource type="Script" uid="uid://b8camrig7kq21" path="res://scripts/player/camera_rig.gd" id="1_cr"]
 

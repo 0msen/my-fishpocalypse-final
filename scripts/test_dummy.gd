@@ -1,6 +1,6 @@
 extends StaticBody3D
 
-@onready var _health: HealthComponent = $HealthComponent
+@onready var _health: HealthComponents = $HealthComponent
 @onready var _label: Label3D = $Label3D
 
 

@@ -27,6 +27,7 @@ var cp_recharge_timer := 0.0
 @onready var anim: AnimatedSprite3D = $Sprite3D
 @onready var spotlight: SpotLight3D = $SpotLight3D
 @onready var audio_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var _fishing_prompt: Label3D = $FishingPrompt
 
 var last_valid_position := Vector3.ZERO
 var previous_valid_position := Vector3.ZERO
@@ -50,6 +51,7 @@ var was_moving_before_dodge := false
 
 const _SFX_WALK  = preload("res://assets/audio/player_walk.mp3")
 const _SFX_DODGE = preload("res://assets/audio/player_dodge.mp3")
+const _SFX_HURT  = preload("res://assets/audio/player_hurt.mp3")
 
 
 func _ready() -> void:
@@ -121,6 +123,12 @@ func _physics_process(delta: float) -> void:
 	_update_aim()
 
 
+func _process(_delta: float) -> void:
+	if _fishing_prompt != null and _fishing_prompt.visible:
+		var t := Time.get_ticks_msec() / 1000.0
+		_fishing_prompt.modulate.a = 0.6 + 0.4 * sin(t * 3.0)
+
+
 func _update_aim() -> void:
 	if camera == null: return
 	var mouse_pos := get_viewport().get_mouse_position()
@@ -183,8 +191,9 @@ func take_damage(amount: float) -> void:
 
 
 func _take_damage(amount: float) -> void:
-	if invincibility_timer > 0.0:
-		return
+	if invincibility_timer > 0.0: return
+	_play_hurt_sound()
+	_play_anim("hurt")
 	health.take_damage(amount)
 	invincibility_timer = INVINCIBILITY_TIME
 	print("[Player] took %.1f damage" % amount)
@@ -237,6 +246,14 @@ func _play_dodge_sound() -> void:
 		audio_player.pitch_scale = 1.5
 		audio_player.play()
 
+func _play_hurt_sound() -> void:
+	if audio_player:
+		audio_player.stream = _SFX_HURT
+		audio_player.volume_db = 1.0
+		audio_player.pitch_scale = 1.0
+		audio_player.play()
+
+
 func _play_anim(name: String) -> void:
 	if current_anim == name: return
 	current_anim = name
@@ -268,6 +285,19 @@ func end_dodge() -> void:
 	ghost_timer = 0.0
 	if was_moving_before_dodge:
 		_play_walk_sound()
+
+
+func show_fishing_prompt() -> void:
+	if _fishing_prompt != null:
+		_fishing_prompt.visible = true
+
+func hide_fishing_prompt() -> void:
+	if _fishing_prompt != null:
+		_fishing_prompt.visible = false
+		_fishing_prompt.modulate.a = 1.0
+
+func play_fishing_anim(anim_name: String) -> void:
+	_play_anim(anim_name)
 
 
 func _spawn_dodge_ghost() -> void:
