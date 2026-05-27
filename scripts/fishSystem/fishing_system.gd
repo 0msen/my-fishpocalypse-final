@@ -69,10 +69,8 @@ func _start_fishing() -> void:
 	if item == null:
 		push_warning("FishingSystem: catch pool empty (all weapons locked by spawn_day?)")
 		return
-	# Face the player toward water and play the matching fishing animation
+	# Pick the fishing animation based on water direction (no rotation — camera is a child of player)
 	var water_dir := _get_water_direction()
-	if _player != null and water_dir.length_squared() > 0.001:
-		_player.global_rotation.y = atan2(water_dir.x, water_dir.z)
 	var anim_name := _pick_fishing_anim(water_dir)
 	if _player != null and _player.has_method("play_fishing_anim"):
 		_player.play_fishing_anim(anim_name)
