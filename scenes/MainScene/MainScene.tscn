@@ -188,7 +188,7 @@ current_texture_preset = SubResource("Resource_uyltb")
 metadata/_custom_type_script = "uid://cddg1xr5hye1d"
 
 [node name="Chunk (0, -1)" type="MeshInstance3D" parent="ISLAND/MarchingSquaresTerrain" unique_id=150482112 node_paths=PackedStringArray("terrain_system")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43613243, 3.766426, -65.93419)
 script = ExtResource("9_oye2u")
 terrain_system = NodePath("..")
 chunk_coords = Vector2i(0, -1)
