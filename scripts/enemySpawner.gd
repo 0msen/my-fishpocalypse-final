@@ -190,10 +190,33 @@ func _pick_random_scene() -> PackedScene:
 	
 func _get_random_position() -> Vector3:
 	if spawn_points_container != null and spawn_points_container.get_child_count() > 0:
-		var pt: Node3D = spawn_points_container.get_child(randi() % spawn_points_container.get_child_count()) as Node3D
-		return pt.global_position
+		var count := spawn_points_container.get_child_count()
+		# shuffle order so we don't always favour the same point on failure
+		var indices := range(count)
+		indices.shuffle()
+		for i in indices:
+			var pt := spawn_points_container.get_child(i) as Node3D
+			var validated := _ground_check(pt.global_position)
+			if validated != Vector3.ZERO:
+				return validated
+		push_warning("[spawner] all spawn points failed ground check; falling back")
 	var angle: float = randf_range(0.0, TAU)
 	return player.position + Vector3(cos(angle), 0.0, sin(angle)) * SPAWN_DISTANCE
+
+
+func _ground_check(pos: Vector3) -> Vector3:
+	var space := get_world_3d().direct_space_state
+	var query  := PhysicsRayQueryParameters3D.create(
+		pos + Vector3(0, 10, 0),
+		pos + Vector3(0, -10, 0)
+	)
+	var result := space.intersect_ray(query)
+	if result.is_empty():
+		return Vector3.ZERO
+	var hit_y: float = result.position.y
+	if hit_y < -0.5:  # below sea level — water, not land
+		return Vector3.ZERO
+	return result.position + Vector3(0, 0.5, 0)  # place enemy just above ground
 	
 	
 func _log_count(event: String) -> void:
