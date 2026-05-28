@@ -19,7 +19,7 @@ func _ready() -> void:
 		_sprite.scale    = Vector3.ONE
 		
 # override take_damage; call super so hp/die logic still runs in enemy.gd
-func take_damage(amount: int) -> void:
+func take_damage(amount: float) -> void:
 	_hurt_flash()
 	super.take_damage(amount)
 	

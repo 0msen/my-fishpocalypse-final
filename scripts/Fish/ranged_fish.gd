@@ -31,7 +31,7 @@ func _ready() -> void:
 	if projectile_scene != null:
 		ProjectilePool.init_pool(projectile_scene)
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: float) -> void:
 	_hurt_flash()
 	super.take_damage(amount)
 	
@@ -49,25 +49,39 @@ func _hurt_flash() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if player_reference == null: return
-	
+
+	jump_timer    -= delta
 	_attack_timer += delta
-	
+
 	if _shoot_frame_timer > 0.0:
 		_shoot_frame_timer -= delta
 		if _shoot_frame_timer <= 0.0:
 			_sprite.frame = 0
-			
+
+	# water escape — stronger jump to clear island edges
+	if global_position.y < -0.5 and jump_timer <= 0.0:
+		velocity.y = jump_force * 2.0
+		jump_timer = jump_cooldown
+
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	else:
+		velocity.y = 0.0
+
 	var player_pos: Vector3 = player_reference.global_position
 	var dist: float         = global_position.distance_to(player_pos)
 	var dir: Vector3        = (player_pos - global_position).normalized()
-	
+
 	if dist > PREFERRED_OUTER:
-		velocity = Vector3(dir.x * speed, velocity.y, dir.z * speed)
+		velocity.x = dir.x * speed
+		velocity.z = dir.z * speed
 	elif dist < PREFERRED_INNER:
-		velocity = Vector3(-dir.x * speed, velocity.y, -dir.z * speed)
+		velocity.x = -dir.x * speed
+		velocity.z = -dir.z * speed
 	else:
-		velocity = Vector3(0.0, velocity.y, 0.0)
-		
+		velocity.x = 0.0
+		velocity.z = 0.0
+
 	move_and_slide()
 	
 	for i: int in get_slide_collision_count():
