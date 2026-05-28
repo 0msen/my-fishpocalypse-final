@@ -1,11 +1,14 @@
 # enemySpawner.gd
 extends Node3D
 
+signal wave_updated(enemies_remaining: int)
+
 @export_group("References")
 @export var player: CharacterBody3D
 @export var tanky_fish: PackedScene
 @export var normal_fish: PackedScene
 @export var ranged_fish: PackedScene
+@export var spawn_points_container: Node3D
 
 @export_group("Population")
 @export var base_population: int = 20
@@ -37,8 +40,10 @@ var _is_night: bool            = false
 var _population_remaining: int = 0
 var current_capacity: int      = 0
 var _spawn_timer: float        = 0.0
+var _dns: Node                 = null
 
 func _ready() -> void:
+	add_to_group(&"enemy_spawner")
 	set_process(false)  # off by default; enabled only during night
 	_scenes = [
 		tanky_fish,
@@ -50,6 +55,7 @@ func _ready() -> void:
 	if dns == null:
 		push_warning("[spawner] no day_night node found in group 'day_night'")
 		return
+	_dns = dns
 	dns.day_night_changed.connect(_on_night_changed)
 	_pick_next_elite_day()
 	
@@ -94,10 +100,13 @@ func _release_to_pool(enemy: Node3D) -> void:
 	enemy.visible = false
 	enemy.set_process(false)
 	enemy.set_physics_process(false)
+	enemy.remove_from_group(&"active_enemy")
 	enemy.global_position = Vector3(0.0, -9999.0, 0.0)
 	_free_list.push_back(_pool.find(enemy))  # find() is O(n) but only on death; dala nanag smile
 	current_capacity -= 1
+	wave_updated.emit(_population_remaining + current_capacity)
 	if dbg: _log_count("death")
+	_check_wave_complete()
 	
 	
 func _on_night_changed(active: bool) -> void:
@@ -105,6 +114,7 @@ func _on_night_changed(active: bool) -> void:
 	if active:
 		_population_remaining = _calculate_population()
 		_spawn_timer = 0.0
+		wave_updated.emit(_population_remaining)
 		set_process(true)  # wake up; start spawning
 		if dbg:
 			print("[spawner] night started; day; ", _day_count,
@@ -129,6 +139,7 @@ func _process(delta: float) -> void:
 	# guard: sleep _process when nothing left to spawn this wave
 	if _population_remaining <= 0 or current_capacity >= max_capacity:
 		set_process(false)
+		_check_wave_complete()
 		return
 	_spawn_timer += delta
 	if _spawn_timer < spawn_interval: return
@@ -154,6 +165,7 @@ func _spawn(pos: Vector3, elite: bool = false) -> void:
 	enemy.visible          = true
 	enemy.set_process(true)
 	enemy.set_physics_process(true)
+	enemy.add_to_group(&"active_enemy")
 	enemy.reset()
 	enemy.apply_day_scaling(_day_count)  # apply day scaling after reset
 	current_capacity      += 1
@@ -161,6 +173,12 @@ func _spawn(pos: Vector3, elite: bool = false) -> void:
 	if dbg: _log_count("spawn")
 	
 	
+func _check_wave_complete() -> void:
+	if _is_night and _population_remaining <= 0 and current_capacity <= 0:
+		if _dns != null:
+			_dns.return_to_day()
+
+
 func _pick_random_scene() -> PackedScene:
 	var roll: int = randi_range(1, _TOTAL_WEIGHT)
 	var cumulative: int = 0
@@ -171,6 +189,9 @@ func _pick_random_scene() -> PackedScene:
 	
 	
 func _get_random_position() -> Vector3:
+	if spawn_points_container != null and spawn_points_container.get_child_count() > 0:
+		var pt: Node3D = spawn_points_container.get_child(randi() % spawn_points_container.get_child_count()) as Node3D
+		return pt.global_position
 	var angle: float = randf_range(0.0, TAU)
 	return player.position + Vector3(cos(angle), 0.0, sin(angle)) * SPAWN_DISTANCE
 	

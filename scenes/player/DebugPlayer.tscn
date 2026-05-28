@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://sac2ms5xt7bk" path="res://scripts/player/combat_system.gd" id="6_q2jae"]
 [ext_resource type="Script" uid="uid://xpnm82ynjqsm" path="res://scripts/itemSystem/items_db.gd" id="7_blpqp"]
 [ext_resource type="Script" uid="uid://bui002s885pkf" path="res://scripts/ui/player_hud.gd" id="8_hud"]
+[ext_resource type="Script" uid="uid://c6xm1esa8nsrh" path="res://scripts/ui/enemy_indicator.gd" id="9_ind"]
 [ext_resource type="Texture2D" uid="uid://bvosluw4bj2ob" path="res://assets/sprites/border_health.png" id="12_bmswy"]
 [ext_resource type="Texture2D" uid="uid://odyn88wwwt5i" path="res://assets/sprites/fists.png" id="13_blpqp"]
 
@@ -587,6 +588,32 @@ custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 15
 text = "SP"
+
+[node name="EnemyCounter" type="Label" parent="UI_HUD" unique_id=100000015]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1209.0
+offset_top = 12.0
+offset_right = -1001.0
+offset_bottom = 52.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 22
+text = "Enemies: --"
+horizontal_alignment = 2
+
+[node name="EnemyIndicator" type="Control" parent="UI_HUD" unique_id=100000016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_ind")
 
 [node name="ColorRect" type="ColorRect" parent="UI_HUD" unique_id=768634712]
 visible = false

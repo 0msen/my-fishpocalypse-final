@@ -56,7 +56,8 @@ func _apply_elite_modifiers() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if player_reference == null: return
-	
+	if global_position.y < -1.0: die(); return  # fell into water; return to pool so wave count stays accurate
+
 	# gravity
 	if not is_on_floor(): velocity.y -= GRAVITY * delta
 	else: velocity.y = 0.0

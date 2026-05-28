@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cv4ugy50jeh4i" path="res://assets/resources/cloud_noise.tres" id="13_g63d6"]
 [ext_resource type="Script" uid="uid://d2m8wwurpal4s" path="res://scripts/fishSystem/fishing_system.gd" id="14_fsys"]
 [ext_resource type="Texture2D" uid="uid://dkg22bs2y3afm" path="res://assets/sprites/splash.png" id="14_mlmqm"]
-[ext_resource type="Script" uid="uid://c4whb06t4dur5" path="res://scripts/EnvironmentRelated/dagat_splash.gd" id="14_nlggb"]
+[ext_resource type="Script" path="res://scripts/EnvironmentRelated/dagat_splash.gd" id="14_nlggb"]
 [ext_resource type="ArrayMesh" uid="uid://dxqp0wkpiex87" path="res://assets/models/kahoy/Sketchfab_Scene_coconut_tree_coconut_tree_mat_0.res" id="14_qrpbx"]
 [ext_resource type="Script" uid="uid://cb2jjm11a4e1i" path="res://scripts/EnvironmentRelated/dagat_script.gd" id="15_auh40"]
 [ext_resource type="PackedScene" uid="uid://cgxmpu1beld0d" path="res://scenes/FishingRelated/fishing_minigame.tscn" id="15_fmg"]
@@ -858,8 +858,35 @@ disable_mode = 2
 [node name="Spawner" parent="." unique_id=1235847215 node_paths=PackedStringArray("player") instance=ExtResource("21_v3fq3")]
 player = NodePath("../Player")
 tanky_fish = ExtResource("24_oj3ja")
+spawn_points_container = NodePath("../SpawnPoints")
 spawn_interval = 0.5
 dbg = false
+
+[node name="SpawnPoints" type="Node3D" parent="." unique_id=9000001]
+
+[node name="SP1" type="Marker3D" parent="SpawnPoints" unique_id=9000002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.958435, 1, -14.789032)
+
+[node name="SP2" type="Marker3D" parent="SpawnPoints" unique_id=9000003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.862305, 1, 17.815258)
+
+[node name="SP3" type="Marker3D" parent="SpawnPoints" unique_id=9000004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.941513, 1, -21.054901)
+
+[node name="SP4" type="Marker3D" parent="SpawnPoints" unique_id=9000005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.365753, 1, 29.253654)
+
+[node name="SP5" type="Marker3D" parent="SpawnPoints" unique_id=9000006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.133236, 1, 40.280846)
+
+[node name="SP6" type="Marker3D" parent="SpawnPoints" unique_id=9000007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.177986, 1, 25.517551)
+
+[node name="SP7" type="Marker3D" parent="SpawnPoints" unique_id=9000008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.247414, 1, 25.087666)
+
+[node name="SP8" type="Marker3D" parent="SpawnPoints" unique_id=9000009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.878887, 1, -65.880455)
 
 [node name="FishingSystem" type="Node" parent="." unique_id=670019011]
 script = ExtResource("14_fsys")
