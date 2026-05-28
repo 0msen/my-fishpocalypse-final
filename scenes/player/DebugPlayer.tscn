@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://xpnm82ynjqsm" path="res://scripts/itemSystem/items_db.gd" id="7_blpqp"]
 [ext_resource type="Script" uid="uid://bui002s885pkf" path="res://scripts/ui/player_hud.gd" id="8_hud"]
 [ext_resource type="Texture2D" uid="uid://bvosluw4bj2ob" path="res://assets/sprites/border_health.png" id="12_bmswy"]
+[ext_resource type="Texture2D" uid="uid://bmrovxx7002pj" path="res://assets/sprites/fist.png" id="13_blpqp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xit8r"]
 size = Vector3(1.5, 1.5, 0.5)
@@ -330,6 +331,30 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p3k1"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(0, 0, 306, 408)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5o41x"]
+atlas = ExtResource("13_blpqp")
+region = Rect2(306, 0, 306, 408)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpf55"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p3k1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5o41x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bmswy"]
+
 [node name="DebugPlayer" type="CharacterBody3D" unique_id=1697580463]
 script = ExtResource("1_x2lrw")
 
@@ -520,11 +545,26 @@ layout_mode = 2
 theme_override_constants/outline_size = 15
 text = "SP"
 
-[node name="FishingPrompt" type="Label3D" parent="."]
-position = Vector3(0, 2.2, 0)
+[node name="FishingPrompt" type="Label3D" parent="." unique_id=466541008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+visible = false
 pixel_size = 0.01
-text = "Press F to Fish"
-font_size = 32
 billboard = 1
 modulate = Color(1, 1, 0, 1)
-visible = false
+text = "Press F to Fish"
+
+[node name="PunchHitbox" type="Area3D" parent="." unique_id=1885591604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5360865)
+collision_mask = 2
+
+[node name="FistSprite" type="AnimatedSprite3D" parent="PunchHitbox" unique_id=673358594]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+shaded = true
+sprite_frames = SubResource("SpriteFrames_wpf55")
+frame = 1
+frame_progress = 0.042966034
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PunchHitbox" unique_id=1154839011]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0.5373771)
+shape = SubResource("SphereShape3D_bmswy")

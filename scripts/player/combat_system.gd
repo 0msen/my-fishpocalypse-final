@@ -40,7 +40,11 @@ func _process(delta: float) -> void:
 		_inventory.use_item("item_slot_1")
 	if Input.is_action_just_pressed("ITEM2"):
 		_inventory.use_item("item_slot_2")
-
+	if Input.is_action_just_pressed("SHOOT"):
+		if _equipped_weapon_node == null:
+			_player._try_punch()
+		else:
+			attack()
 	_handle_regen(delta)
 
 
@@ -64,6 +68,23 @@ func fire() -> void:
 	_equipped_weapon_node.shoot(_player.get_facing_dir())
 	fired.emit(data)
 
+func attack() -> void:
+	if _equipped_weapon_node == null: return
+	if _shot_delay_timer > 0.0: return
+	var data: FishWeaponData = _equipped_weapon_node.data
+	if data == null: return
+	if _player.CP < data.base_recharge_cost: return
+
+	_shot_delay_timer = float(data.base_shot_delay)
+	_player.deduct_cp(data.base_recharge_cost)
+	_player.block_cp_recharge(float(data.base_shot_delay))
+
+	if _equipped_weapon_node.get("is_melee"):
+		_equipped_weapon_node.melee_attack(_player.get_facing_dir())
+		_player._swing_weapon(float(data.base_shot_delay))
+		fired.emit(data)
+	else:
+		fire()
 
 func dodge() -> void:
 	if _player.SP < dodge_sp_cost or _player.is_dodging: return

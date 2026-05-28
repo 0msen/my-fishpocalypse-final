@@ -7,6 +7,15 @@ extends CharacterBody3D
 @onready var camera: Camera3D = get_viewport().get_camera_3d()
 @onready var weapon_holder: Marker3D = $Kamot
 
+@onready var fist_sprite: AnimatedSprite3D = $PunchHitbox/FistSprite
+@onready var punch_hitbox: Area3D = $PunchHitbox 
+var _punch_timer: float = 0.0
+const PUNCH_COOLDOWN := 0.2
+const PUNCH_DAMAGE := 100.0
+const PUNCH_RANGE := 3
+var _punch_active := false
+const PUNCH_SP_COST := 17.0
+
 var _facing_dir := Vector3.FORWARD
 
 @export var HP := 100
@@ -55,6 +64,7 @@ const _SFX_HURT  = preload("res://assets/audio/player_hurt.mp3")
 
 
 func _ready() -> void:
+	fist_sprite.visible = false
 	add_to_group("player")
 	if audio_player:
 		audio_player.volume_db = 5.0
@@ -76,6 +86,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	save_timer += delta
+	if _punch_timer > 0.0: _punch_timer -= delta
 	if cp_recharge_blocked:
 		cp_recharge_timer -= delta
 		if cp_recharge_timer <= 0.0:
@@ -128,6 +139,82 @@ func _process(_delta: float) -> void:
 		var t := Time.get_ticks_msec() / 1000.0
 		_fishing_prompt.modulate.a = 0.6 + 0.4 * sin(t * 3.0)
 
+func _try_punch() -> void:
+	if _punch_timer > 0.0: return
+	if SP < PUNCH_SP_COST: return
+	_punch_timer = PUNCH_COOLDOWN
+	deduct_sp(PUNCH_SP_COST)
+	_play_anim("attack")
+	_swing_weapon(PUNCH_COOLDOWN)
+	_execute_punch()
+
+func _execute_punch() -> void:
+	var move_dir: Vector3 = Vector3(velocity.x, 0.0, velocity.z).normalized()
+	if move_dir == Vector3.ZERO:
+		move_dir = _facing_dir
+
+	# spawn a temporary fist sprite for this punch
+	var fist: AnimatedSprite3D = fist_sprite.duplicate()
+	get_parent().add_child(fist)
+
+	var angle_y: float = atan2(-move_dir.x, -move_dir.z)
+	fist.rotation.y = angle_y
+	fist.rotation.x = 0.0
+
+	var dot_right: float = move_dir.dot(Vector3(1, 0, 0))
+	if dot_right >= 0.0:
+		fist.frame = 0
+	else:
+		fist.frame = 1
+
+	var start_offset: float = 0.5
+	fist.visible = true
+	fist.global_position = global_position + move_dir * start_offset
+
+	var hit_bodies: Array = []
+	var steps: int = 10
+	for i in range(1, steps + 1):
+		var t: float = float(i) / float(steps)
+		punch_hitbox.global_position = global_position + move_dir * (start_offset + PUNCH_RANGE * t)
+		fist.global_position = global_position + move_dir * (start_offset + PUNCH_RANGE * t)
+		punch_hitbox.monitoring = true
+
+		await get_tree().create_timer(0.03).timeout
+		await get_tree().physics_frame
+
+		for body in punch_hitbox.get_overlapping_bodies():
+			if body == self: continue
+			if body in hit_bodies: continue
+			if body.has_method("take_damage"):
+				hit_bodies.append(body)
+				body.take_damage(PUNCH_DAMAGE)
+				print("[Punch] hit %s for %.1f" % [body.name, PUNCH_DAMAGE])
+				var knockback_dir: Vector3 = (body.global_position - global_position).normalized()
+				knockback_dir.y = 0.0
+				body.velocity += knockback_dir * 8.0
+
+		punch_hitbox.monitoring = false
+
+	if hit_bodies.is_empty():
+		print("[Punch] missed")
+
+	fist.queue_free()
+	punch_hitbox.global_position = global_position
+	
+func _swing_weapon(duration: float) -> void:
+	_play_anim("attack")
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(
+		weapon_holder, "rotation_degrees",
+		weapon_holder.rotation_degrees + Vector3(0, 45, 0),
+		duration * 0.35
+	)
+	tween.tween_property(
+		weapon_holder, "rotation_degrees",
+		weapon_holder.rotation_degrees,
+		duration * 0.65
+	)
 
 func _update_aim() -> void:
 	if camera == null: return
