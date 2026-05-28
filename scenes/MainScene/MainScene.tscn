@@ -20,17 +20,41 @@
 [ext_resource type="Script" uid="uid://cb2jjm11a4e1i" path="res://scripts/EnvironmentRelated/dagat_script.gd" id="15_auh40"]
 [ext_resource type="PackedScene" uid="uid://cgxmpu1beld0d" path="res://scenes/FishingRelated/fishing_minigame.tscn" id="15_fmg"]
 [ext_resource type="AudioStream" uid="uid://om8oo53ef3fb" path="res://assets/audio/nature_sea.mp3" id="15_ruire"]
-[ext_resource type="Resource" uid="uid://dyjmr7uqctvpk" path="res://assets/resources/items/items_db.tres" id="17_db"]
-[ext_resource type="Resource" uid="uid://lih8tf53aotr" path="res://assets/resources/rarities/rarity_config.tres" id="18_rc"]
 [ext_resource type="PackedScene" uid="uid://x0tobd048vlo" path="res://scenes/EnemyRelated/enemySpawner.tscn" id="21_v3fq3"]
 [ext_resource type="PackedScene" uid="uid://dwr1m6px173c6" path="res://scenes/DayNightSystem/dayNightSystem.tscn" id="23_bv014"]
+[ext_resource type="Script" uid="uid://cb7xcgwlk1l1h" path="res://scripts/itemSystem/itemAttributes/fish_weapon_data.gd" id="23_k4wqj"]
+[ext_resource type="Resource" uid="uid://ddk0edb4xrwyp" path="res://assets/resources/items/weapons/sardine_shooter.tres" id="24_jfs7f"]
 [ext_resource type="PackedScene" uid="uid://sheavwaiaj2f" path="res://scenes/EnemyRelated/tank_fish.tscn" id="24_oj3ja"]
-[ext_resource type="PackedScene" uid="uid://by4e1q3ce1ehm" path="res://scenes/EnemyRelated/fish.tscn" id="25_mlmqm"]
-[ext_resource type="PackedScene" uid="uid://hxknigqyh2fs" path="res://scenes/EnemyRelated/ranged_fish.tscn" id="26_mlmqm"]
+[ext_resource type="Resource" uid="uid://duqs0wt1hjnub" path="res://assets/resources/items/weapons/tuna_lobber.tres" id="25_d74lr"]
+[ext_resource type="Resource" uid="uid://djy70k6j1vhd3" path="res://assets/resources/items/weapons/mackerel_burst.tres" id="26_mq6fd"]
+[ext_resource type="Resource" uid="uid://csf1eacvh6dwt" path="res://assets/resources/items/weapons/bangus_blaster.tres" id="27_rppsr"]
+[ext_resource type="Resource" uid="uid://bx8tuqsxbgofm" path="res://assets/resources/items/weapons/squid_spray.tres" id="28_8jemf"]
 [ext_resource type="PackedScene" uid="uid://dujw7glgc57os" path="res://scenes/player/CameraRig.tscn" id="28_cr"]
+[ext_resource type="Resource" uid="uid://p8aexjtlixri" path="res://assets/resources/items/weapons/crab_cannon.tres" id="29_lkvag"]
 [ext_resource type="Script" uid="uid://d0testdmy1p4r" path="res://scripts/test_dummy.gd" id="29_td"]
 [ext_resource type="Script" uid="uid://butapasd4olx0" path="res://scripts/components/health_component.gd" id="30_hc"]
+[ext_resource type="Resource" uid="uid://dfotxynqstn4u" path="res://assets/resources/items/weapons/shark_shotgun.tres" id="30_xdhpf"]
+[ext_resource type="Resource" uid="uid://umlmcxwchtcx" path="res://assets/resources/items/weapons/bakunawa_beam.tres" id="31_cufi6"]
 [ext_resource type="PackedScene" uid="uid://dfygvlwksvhog" path="res://scenes/FishingRelated/shore_zone.tscn" id="31_nlggb"]
+[ext_resource type="Script" uid="uid://btinxc3vf3cat" path="res://scripts/itemSystem/itemAttributes/fishing_pole_data.gd" id="32_wksbj"]
+[ext_resource type="Resource" uid="uid://dubjjn8dtttoc" path="res://assets/resources/items/poles/0_basic_pole.tres" id="33_in8t3"]
+[ext_resource type="Resource" uid="uid://dqgabgbptwfw6" path="res://assets/resources/items/poles/1_reinforced_pole.tres" id="34_76neo"]
+[ext_resource type="Resource" uid="uid://bh7y3pobcvt0r" path="res://assets/resources/items/poles/2_fish_pole.tres" id="35_uw0dn"]
+[ext_resource type="Script" uid="uid://8ko8ju356at2" path="res://scripts/itemSystem/itemAttributes/healing_item_data.gd" id="36_lh3yp"]
+[ext_resource type="Resource" uid="uid://dcprpe0i084oq" path="res://assets/resources/items/healingItems/0_bandage.tres" id="37_8jh21"]
+[ext_resource type="Resource" uid="uid://i0d3hh0ks8yx" path="res://assets/resources/items/healingItems/3_fish_wrap.tres" id="38_gmmay"]
+[ext_resource type="Resource" uid="uid://crfcm8wn0p6xd" path="res://assets/resources/items/healingItems/1_herbal_brew.tres" id="39_r8nit"]
+[ext_resource type="Resource" uid="uid://7qm7iiadgk3h" path="res://assets/resources/items/healingItems/4_sea_blessing.tres" id="40_w16n4"]
+[ext_resource type="Script" uid="uid://xpnm82ynjqsm" path="res://scripts/itemSystem/items_db.gd" id="41_250i6"]
+[ext_resource type="Script" uid="uid://b3l4mkx2jhvf6" path="res://scripts/rarity/rarity_config.gd" id="42_fep02"]
+[ext_resource type="Script" uid="uid://b6n72xqvx6ro0" path="res://scripts/rarity/rarity_tier.gd" id="43_3cm0v"]
+[ext_resource type="Resource" uid="uid://cn865m7rml8k8" path="res://assets/resources/rarities/0_common.tres" id="44_pi5ds"]
+[ext_resource type="Resource" uid="uid://c6bjtoa84jgmi" path="res://assets/resources/rarities/1_uncommon.tres" id="45_ldaio"]
+[ext_resource type="Resource" uid="uid://1dg3p3oa18u0" path="res://assets/resources/rarities/2_rare.tres" id="46_4k13c"]
+[ext_resource type="Resource" uid="uid://ckbetd72dnxex" path="res://assets/resources/rarities/3_epic.tres" id="47_iykhf"]
+[ext_resource type="Resource" uid="uid://b2jobnf883hmk" path="res://assets/resources/rarities/4_legendary.tres" id="48_ru1im"]
+[ext_resource type="Resource" uid="uid://tjjifhuhteam" path="res://assets/resources/rarities/5_mythic.tres" id="49_5qmke"]
+[ext_resource type="PackedScene" uid="uid://bjgds8umisd4" path="res://scenes/ItemRelated/ItemSpawner.tscn" id="55_y07ru"]
 
 [sub_resource type="Texture2D" id="Texture2D_p1dug"]
 resource_local_to_scene = false
@@ -109,11 +133,25 @@ shader_parameter/speed = 0.0030000001425
 [sub_resource type="PlaneMesh" id="PlaneMesh_b37wp"]
 material = SubResource("ShaderMaterial_g63d6")
 
+[sub_resource type="Resource" id="Resource_p07kg"]
+script = ExtResource("41_250i6")
+fish_weapons = Array[ExtResource("23_k4wqj")]([ExtResource("24_jfs7f"), ExtResource("25_d74lr"), ExtResource("26_mq6fd"), ExtResource("27_rppsr"), ExtResource("28_8jemf"), ExtResource("29_lkvag"), ExtResource("30_xdhpf"), ExtResource("31_cufi6")])
+healing_items = Array[ExtResource("36_lh3yp")]([ExtResource("37_8jh21"), ExtResource("38_gmmay"), ExtResource("39_r8nit"), ExtResource("40_w16n4")])
+fishing_poles = Array[ExtResource("32_wksbj")]([ExtResource("33_in8t3"), ExtResource("34_76neo"), ExtResource("35_uw0dn")])
+
+[sub_resource type="Resource" id="Resource_86ua7"]
+script = ExtResource("42_fep02")
+tiers = Array[ExtResource("43_3cm0v")]([ExtResource("44_pi5ds"), ExtResource("45_ldaio"), ExtResource("46_4k13c"), ExtResource("47_iykhf"), ExtResource("48_ru1im"), ExtResource("49_5qmke")])
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_dummy"]
 size = Vector3(1, 2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dummy"]
 size = Vector3(1, 2, 1)
+
+[sub_resource type="Resource" id="Resource_epauo"]
+script = ExtResource("42_fep02")
+metadata/_custom_type_script = "uid://b3l4mkx2jhvf6"
 
 [node name="TestScene" type="Node3D" unique_id=469542510]
 
@@ -665,10 +703,12 @@ disable_mode = 2
 player = NodePath("../Player")
 tanky_fish = ExtResource("24_oj3ja")
 
-[node name="FishingSystem" type="Node" parent="." unique_id=670019011]
+[node name="FishingSystem" type="Node" parent="." unique_id=670019011 node_paths=PackedStringArray("minigame", "item_spawner")]
 script = ExtResource("14_fsys")
-items_db = ExtResource("17_db")
-rarity_config = ExtResource("18_rc")
+items_db = SubResource("Resource_p07kg")
+rarity_config = SubResource("Resource_86ua7")
+minigame = NodePath("../UI/FishingMinigame")
+item_spawner = NodePath("../Test_SpawnSystem")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1882678914]
 
@@ -821,3 +861,8 @@ transform = Transform3D(0.7604059, 0, 0.75660694, 0, 1, 0, -0.649448, 0, 0.88587
 
 [node name="ShoreZone43" parent="." unique_id=266579001 instance=ExtResource("31_nlggb")]
 transform = Transform3D(-0.5807029, 0, 0.94844455, 0, 1, 0, -0.8141154, 0, -0.6765189, -47.122715, 2, 49.902992)
+
+[node name="Test_SpawnSystem" parent="." unique_id=2078365853 instance=ExtResource("55_y07ru")]
+rarity_config = SubResource("Resource_epauo")
+
+[node name="FishingMinigame" parent="." unique_id=1621987674 instance=ExtResource("15_fmg")]
