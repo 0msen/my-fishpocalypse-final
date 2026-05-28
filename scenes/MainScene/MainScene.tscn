@@ -901,3 +901,4 @@ item_spawner = NodePath("../ItemSpawner")
 [node name="FishingMinigame" parent="UI" unique_id=1396498718 instance=ExtResource("15_fmg")]
 
 [node name="ItemSpawner" parent="." unique_id=2078365853 instance=ExtResource("55_y07ru")]
+rarity_config = ExtResource("18_rc")
