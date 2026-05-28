@@ -1,13 +1,9 @@
 [gd_scene format=3 uid="uid://hxknigqyh2fs"]
 
-[ext_resource type="Texture2D" uid="uid://d3w1x8l1jmd33"
-path="res://assets/sprites/isda_shoot.png" id="1_5s0u4"]
-[ext_resource type="Script" uid="uid://dnlrt1d3a4f1p"
-path="res://scripts/Fish/ranged_fish.gd" id="1_t6q6i"]
-[ext_resource type="PackedScene" uid="uid://blcs4n4ypsi37"
-path="res://scenes/EnemyRelated/bubble_projectile.tscn" id="2_j6bek"]
-[ext_resource type="AudioStream" uid="uid://b6u6vawuq8sct"
-path="res://assets/audio/enemy_shoot.mp3" id="4_m6y2y"]
+[ext_resource type="Texture2D" uid="uid://d3w1x8l1jmd33" path="res://assets/sprites/isda_shoot.png" id="1_5s0u4"]
+[ext_resource type="Script" uid="uid://dnlrt1d3a4f1p" path="res://scripts/Fish/ranged_fish.gd" id="1_t6q6i"]
+[ext_resource type="PackedScene" uid="uid://blcs4n4ypsi37" path="res://scenes/EnemyRelated/bubble_projectile.tscn" id="2_j6bek"]
+[ext_resource type="AudioStream" uid="uid://b6u6vawuq8sct" path="res://assets/audio/enemy_shoot.mp3" id="4_m6y2y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6bek"]
 atlas = ExtResource("1_5s0u4")
@@ -34,8 +30,7 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_j6bek"]
 size = Vector3(1.4510918, 1.8967285, 0.31103516)
 
-[node name="Ranged_Fish" type="CharacterBody3D" unique_id=1313920117
-node_paths=PackedStringArray("shoot_audio")]
+[node name="Ranged_Fish" type="CharacterBody3D" unique_id=1313920117 node_paths=PackedStringArray("shoot_audio")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 collision_layer = 2
 script = ExtResource("1_t6q6i")

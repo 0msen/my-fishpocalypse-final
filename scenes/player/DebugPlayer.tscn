@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://bvosluw4bj2ob" path="res://assets/sprites/border_health.png" id="12_bmswy"]
 [ext_resource type="Texture2D" uid="uid://bmrovxx7002pj" path="res://assets/sprites/fist.png" id="13_blpqp"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dp"]
+radius = 0.4
+height = 1.8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ok2xt"]
 atlas = ExtResource("2_gf0uj")
@@ -269,9 +272,6 @@ animations = [{
 script = ExtResource("7_blpqp")
 metadata/_custom_type_script = "uid://xpnm82ynjqsm"
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dp"]
-radius = 0.4
-height = 1.8
 [sub_resource type="Gradient" id="Gradient_bmswy"]
 offsets = PackedFloat32Array(0.5282258, 1)
 colors = PackedColorArray(0.5376838, 0, 0, 1, 1, 0, 0, 1)
@@ -357,8 +357,8 @@ animations = [{
 [sub_resource type="SphereShape3D" id="SphereShape3D_bmswy"]
 
 [node name="DebugPlayer" type="CharacterBody3D" unique_id=1697580463]
-script = ExtResource("1_x2lrw")
 floor_snap_length = 0.5
+script = ExtResource("1_x2lrw")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=629382131]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 6, 10)
@@ -387,7 +387,7 @@ frame_progress = 0.3019595
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.4519567, 0)
 visible = false
 light_color = Color(1, 0, 0, 1)
-light_energy = 5.0
+light_energy = 6.0
 shadow_enabled = true
 spot_range = 7.143156
 spot_angle = 44.10083

@@ -25,8 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://x0tobd048vlo" path="res://scenes/EnemyRelated/enemySpawner.tscn" id="21_v3fq3"]
 [ext_resource type="PackedScene" uid="uid://dwr1m6px173c6" path="res://scenes/DayNightSystem/dayNightSystem.tscn" id="23_bv014"]
 [ext_resource type="PackedScene" uid="uid://sheavwaiaj2f" path="res://scenes/EnemyRelated/tank_fish.tscn" id="24_oj3ja"]
-[ext_resource type="PackedScene" uid="uid://by4e1q3ce1ehm" path="res://scenes/EnemyRelated/fish.tscn" id="25_mlmqm"]
-[ext_resource type="PackedScene" uid="uid://hxknigqyh2fs" path="res://scenes/EnemyRelated/ranged_fish.tscn" id="26_mlmqm"]
 [ext_resource type="PackedScene" uid="uid://dujw7glgc57os" path="res://scenes/player/CameraRig.tscn" id="28_cr"]
 [ext_resource type="Script" uid="uid://d0testdmy1p4r" path="res://scripts/test_dummy.gd" id="29_td"]
 [ext_resource type="Script" uid="uid://butapasd4olx0" path="res://scripts/components/health_component.gd" id="30_hc"]
@@ -99,6 +97,12 @@ size = Vector3(1, 4.9920654, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ruire"]
 size = Vector3(67, 5, 150)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dummy"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dummy"]
+size = Vector3(1, 2, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g63d6"]
 render_priority = 0
 shader = ExtResource("12_b37wp")
@@ -108,12 +112,6 @@ shader_parameter/speed = 0.0030000001425
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_b37wp"]
 material = SubResource("ShaderMaterial_g63d6")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dummy"]
-size = Vector3(1, 2, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_dummy"]
-size = Vector3(1, 2, 1)
 
 [node name="TestScene" type="Node3D" unique_id=469542510]
 
@@ -650,33 +648,8 @@ shape = SubResource("BoxShape3D_ruire")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28279114, 0, 0)
 stream = ExtResource("15_ruire")
 
-[node name="SKY" type="Node3D" parent="." unique_id=1829971248]
-transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 71.67545, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SKY" unique_id=169244059]
-layers = 1023
-mesh = SubResource("PlaneMesh_b37wp")
-
-[node name="Player" parent="." unique_id=478782437 instance=ExtResource("11_jwbod")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.687, 1, -14.924)
-disable_mode = 2
-
-[node name="Spawner" parent="." unique_id=1235847215 node_paths=PackedStringArray("player") instance=ExtResource("21_v3fq3")]
-player = NodePath("../Player")
-tanky_fish = ExtResource("24_oj3ja")
-
-[node name="FishingSystem" type="Node" parent="." unique_id=670019011]
-script = ExtResource("14_fsys")
-items_db = ExtResource("17_db")
-rarity_config = ExtResource("18_rc")
-
-[node name="UI" type="CanvasLayer" parent="." unique_id=1882678914]
-
-[node name="FishingMinigame" parent="UI" unique_id=1396498718 instance=ExtResource("15_fmg")]
-
-[node name="CameraRig" parent="." unique_id=393608575 instance=ExtResource("28_cr")]
-
 [node name="Fishing Zones" type="Node3D" parent="." unique_id=1064904067]
+transform = Transform3D(0.9999061, -0.013700406, 0, 0.013700406, 0.9999061, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="TestDummy" type="StaticBody3D" parent="Fishing Zones" unique_id=650333710]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 1, -17)
@@ -823,3 +796,29 @@ transform = Transform3D(0.7604059, 0, 0.75660694, 0, 1, 0, -0.649448, 0, 0.88587
 
 [node name="ShoreZone43" parent="Fishing Zones" unique_id=266579001 instance=ExtResource("31_nlggb")]
 transform = Transform3D(-0.5807029, 0, 0.94844455, 0, 1, 0, -0.8141154, 0, -0.6765189, -47.122715, 2, 49.902992)
+
+[node name="SKY" type="Node3D" parent="." unique_id=1829971248]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 71.67545, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SKY" unique_id=169244059]
+layers = 1023
+mesh = SubResource("PlaneMesh_b37wp")
+
+[node name="Player" parent="." unique_id=478782437 instance=ExtResource("11_jwbod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.687, 1, -14.924)
+disable_mode = 2
+
+[node name="Spawner" parent="." unique_id=1235847215 node_paths=PackedStringArray("player") instance=ExtResource("21_v3fq3")]
+player = NodePath("../Player")
+tanky_fish = ExtResource("24_oj3ja")
+
+[node name="FishingSystem" type="Node" parent="." unique_id=670019011]
+script = ExtResource("14_fsys")
+items_db = ExtResource("17_db")
+rarity_config = ExtResource("18_rc")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1882678914]
+
+[node name="FishingMinigame" parent="UI" unique_id=1396498718 instance=ExtResource("15_fmg")]
+
+[node name="CameraRig" parent="." unique_id=393608575 instance=ExtResource("28_cr")]
