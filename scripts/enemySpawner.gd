@@ -77,6 +77,7 @@ func _build_pool() -> void:
 			_pool.append(instance)
 			_free_list.append(idx)
 			idx += 1
+	_free_list.shuffle()  # distribute all types evenly; without this tanky fish stay at stack bottom and never spawn
 	if dbg: print("[spawner] pool built; size; ", _pool.size())
 		
 		
