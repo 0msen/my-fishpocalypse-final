@@ -36,12 +36,21 @@ func can_shoot() -> bool:
 func acquire() -> Node:
 	if _free_list.is_empty(): return null
 	var idx: int = _free_list.pop_back()
+	var proj: Node = _pool[idx]
+	if not is_instance_valid(proj):
+		push_warning("[ProjectilePool] Skipped freed node at idx ", idx)
+		current_count = maxi(current_count - 1, 0)
+		return null
 	current_count += 1
-	return _pool[idx]
+	return proj
 
 func release(proj: Node) -> void:
+	if not is_instance_valid(proj): return
+	if not proj.has_meta(&"pool_idx"): return
+	var idx: int = proj.get_meta(&"pool_idx")
+	if _free_list.has(idx): return  # already released this frame; ignore double-retire
 	proj.visible = false
 	proj.set_process(false)
 	proj.global_position = Vector3(0.0, -9999.0, 0.0)
-	_free_list.push_back(proj.get_meta(&"pool_idx"))
+	_free_list.push_back(idx)
 	current_count -= 1
